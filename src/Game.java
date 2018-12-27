@@ -4,9 +4,12 @@
  *
  */
 public class Game {
-    Position[] board;  //The board which contains a number of board positions
+    Tile[] board;  //The board which contains a number of board positions
 
     public static void main(String[] args){
-        new Board();
+        Board b = new Board();
+        b.addPiece('q',0,8,8);
+        b.addPiece('q',1,1,1);
+        b.print();
     }
 }
