@@ -1,13 +1,15 @@
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * This class is the board itself and contains all the positions for the chess board
  */
 public class Board {
-    List<Piece> pieces; //contains a list of all the pieces on the board
+    LinkedList<Piece> pieces; //contains a list of all the pieces on the board
     Tile[][] board;   //the actual board and each position on the board
 
     public Board(){
+        pieces = new LinkedList<Piece>();
         board = new Tile[8][8];
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
@@ -34,11 +36,14 @@ public class Board {
             case 'b':
                 break;
             case 'k':
-
+                King k = new King(colour,this);
+                board[row-1][col-1].addPiece(k);
+                pieces.add(k);
                 break;
             case 'q':
-                Queen q = new Queen(colour);
+                Queen q = new Queen(colour,this);
                 board[row-1][col-1].addPiece(q);
+                pieces.add(q);
                 break;
         }
     }
@@ -46,7 +51,7 @@ public class Board {
     public void print(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
-                System.out.print(board[i][j].getPiece());
+                System.out.print(board[i][j].getPiece()+"\t");
             }
             System.out.println();
         }

@@ -11,7 +11,6 @@ public class Move {
         this.piece = piece;
         this.from = moveFrom;
         this.to = moveTo;
-        //Do the work of moving the piece legally.
     }
 
     @Override

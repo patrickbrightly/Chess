@@ -9,4 +9,6 @@ public interface Piece {
     public Tile move(Move newTile); //Moves the piece to the new position
     public boolean causesCheck();   //checks to see if the piece causes check
     public String getName();
+    public void setTile(Tile newTile);
+    public int getColour();
 }
