@@ -6,10 +6,13 @@ import java.util.List;
  */
 public class Board {
     LinkedList<Piece> pieces; //contains a list of all the pieces on the board
-    LinkedList<Piece> blackPieces;
-    LinkedList<Piece> whitePieces;
+    LinkedList<Piece> blackPieces;  //contains all black pieces in play
+    LinkedList<Piece> whitePieces;  //contains all white pieces in play
     Tile[][] board;   //the actual board and each position on the board
 
+    /**
+     * This method creates a standard 8x8 board with no pieces
+     */
     public Board(){
         pieces = new LinkedList<Piece>();
         blackPieces = new LinkedList<Piece>();
@@ -23,14 +26,15 @@ public class Board {
     }
 
     /**
-     *
+     * This method adds a single piece to the board using 1-8 for rows and columns
+     * It also places the pieces in their respective lists
      * @param piece is the character representing piece to be added
      * @param colour 0 for black, 1 for white
      * @param row is the row
      * @param col is the column
      */
     public void addPiece(char piece,int colour,int row, int col){
-        switch (piece){
+        switch (piece){ //determines which piece to place
             case 'p':
                 Pawn p = new Pawn(colour,this);
                 board[row-1][col-1].addPiece(p);
@@ -94,6 +98,9 @@ public class Board {
         }
     }
 
+    /**
+     * This method prints an ASCII representation of the board to the console with 1A in the top left
+     */
     public void print(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){

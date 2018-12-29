@@ -1,17 +1,27 @@
 import java.util.LinkedList;
 
 public class Knight implements Piece {
-    Board board;
-    Tile tile;
-    int colour;
-    String name;
+    Board board;    //the board the piece is on
+    Tile tile;      //the tile the piece is on
+    int colour;     //the colour of the piece
+    String name;    //the name of the piece (for ASCII representation)
 
+    /**
+     * This constructor creates a knight
+     * @param colour the colour of the knight (0 for black, 1 for white)
+     * @param board the board the knight belongs to
+     */
     public Knight(int colour, Board board){
         this.colour = colour;
         name = "h"+colour;
         this.board = board;
     }
 
+    /**
+     * This method returns a linked list of all the possible tiles the piece can legally move to
+     * The method checks the 8 possible L-shaped moves.
+     * @return the list with all legal moves for this piece
+     */
     public LinkedList<Tile> getMoves(){
         LinkedList<Tile> result = new LinkedList<Tile>();
         //2 left, 1 up
@@ -81,6 +91,10 @@ public class Knight implements Piece {
         return result;
     }
 
+    /**
+     * This method sets the piece to a tile
+     * @param newTile the destination tile
+     */
     public void setTile(Tile newTile){
         this.tile = newTile;
     }
@@ -94,7 +108,7 @@ public class Knight implements Piece {
         for (Tile t: getMoves()
         ) {
             if(t.current!=null){
-                if(t.current.getClass()==King.class){
+                if(t.current.getClass()==King.class && t.current.getColour()!=colour){
                     result = true;
                     break;
                 }
@@ -103,10 +117,18 @@ public class Knight implements Piece {
         return result;
     }   //checks to see if the piece causes check
 
+    /**
+     * This method returns the name of the piece (character/colour code)
+     * @return piece's name
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * This method returns the piece's colour
+     * @return 0 if black, 1 if white
+     */
     public int getColour(){
         return colour;
     }

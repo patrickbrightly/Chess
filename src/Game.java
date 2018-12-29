@@ -35,6 +35,10 @@ public class Game {
 //        }
     }
 
+    /**
+     * This method sets up a standard chess board configuration
+     * @return a new board with the black pieces in rows 7/8 and white in rows 1/2
+     */
     public Board setStandardBoard(){
         Board result = new Board();
         result.addPiece('r',1,1,1);

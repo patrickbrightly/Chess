@@ -2,18 +2,27 @@
  * These are the spaces on the board.
  */
 public class Tile {
-    int col; //the x Coordinate of the piece
-    int row; //the y Coordinate of the piece
+    int col; //the column of the piece
+    int row; //the row of the piece
     String name; //the name of the position
-    Piece current;
+    Piece current;  //the current piece on this tile
 
-    public Tile(int x, int y){
-        col = y;
-        row = x;
+    /**
+     * This constructor creates a tile with a known position on the board
+     * @param col column of the tile
+     * @param row row of the tile
+     */
+    public Tile(int row, int col){
+        this.col = col;
+        this.row = row;
         current = null;
-        name = (row+1)+""+(char)(col+65);
+        name = (this.row+1)+""+(char)(this.col+65);
     }
 
+    /**
+     * This methods checks if there is a piece on this square
+     * @return true if there isn't a piece on this tile
+     */
     public Boolean isEmpty(){
         Boolean result = false;
         if(current==null){
@@ -22,6 +31,10 @@ public class Tile {
         return result;
     }
 
+    /**
+     * This method adds a piece to this tile
+     * @param piece the piece to be added to the tile
+     */
     public void addPiece(Piece piece){
         if(current == null){
             current = piece;
@@ -31,6 +44,10 @@ public class Tile {
         }
     }
 
+    /**
+     * This method gets the name of the piece on this tile
+     * @return the string name of the piece on the tile
+     */
     public String getPiece(){
         if(current==null){
             return "--";
