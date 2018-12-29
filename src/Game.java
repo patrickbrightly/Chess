@@ -10,29 +10,18 @@ public class Game {
 //        Game g = new Game();
         Board b = new Board();
         b.addPiece('h',0,3,3);
-        b.addPiece('h',1,8,4);
-//        b.addPiece('q',1,8,5);
+        b.addPiece('q',1,1,3);
 //        b.addPiece('q',1,3,4);
         b.print();
-        System.out.println("p0");
-        for(Tile t: b.pieces.get(0).getMoves()){
-            System.out.print(t.name+"\t");
-        }
-        System.out.println("\np1");
-        for(Tile t: b.pieces.get(1).getMoves()){
-            System.out.print(t.name+"\t");
-        }
-//        System.out.println("\nq2");
-//        for(Tile t: b.pieces.get(2).getMoves()){
-//            System.out.print(t.name+"\t");
-//        }
-//        System.out.println("\nq3");
-//        for(Tile t: b.pieces.get(3).getMoves()){
-//            System.out.print(t.name+"\t");
-//        }
-//        for(Piece p: b.pieces){
-//            System.out.println(p.causesCheck());
-//        }
+        System.out.println();
+        new Move(b.pieces.getFirst(),b.board[1][0]);
+        b.print();
+        System.out.println();
+        new Move(b.pieces.getFirst(),b.board[0][2]);
+        b.print();
+        System.out.println();
+        new Move(b.pieces.getFirst(),b.board[0][4]);
+        b.print();
     }
 
     /**

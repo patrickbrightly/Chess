@@ -99,10 +99,10 @@ public class Knight implements Piece {
         this.tile = newTile;
     }
 
-    //Gives all the possible moves for the piece
-    public Tile move(Move newTile){
-        return null;
-    } //Moves the piece to the new position
+    /**
+     * This method checks to see if the piece causes check for the enemy
+     * @return true if the piece causes check
+     */
     public boolean causesCheck(){
         boolean result = false;
         for (Tile t: getMoves()
@@ -131,5 +131,27 @@ public class Knight implements Piece {
      */
     public int getColour(){
         return colour;
+    }
+
+    /**
+     * This method returns the tile this piece is on
+     * @return this piece's tile
+     */
+    public Tile getTile(){
+        return tile;
+    }
+
+    /**
+     * This method removes the captured piece from the available enemy pieces
+     * @param moveTo the tile that is being moved to
+     */
+    public void capture(Tile moveTo){
+        Piece p = moveTo.current;
+        if(p.getColour()==0){
+            board.blackPieces.remove(p);
+        } else {
+            board.whitePieces.remove(p);
+        }
+        board.pieces.remove(p);
     }
 }
