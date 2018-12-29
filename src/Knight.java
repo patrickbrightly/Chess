@@ -14,6 +14,70 @@ public class Knight implements Piece {
 
     public LinkedList<Tile> getMoves(){
         LinkedList<Tile> result = new LinkedList<Tile>();
+        //2 left, 1 up
+        if((tile.col-2)>=0 && (tile.row-1)>=0){
+            if(board.board[tile.row-1][tile.col-2].current==null){
+                result.add(board.board[tile.row-1][tile.col-2]);
+            } else if(board.board[tile.row-1][tile.col-2].current.getColour()!=colour){
+                result.add(board.board[tile.row-1][tile.col-2]);
+            }
+        }
+        //2 left, 1 down
+        if((tile.col-2)>=0 && (tile.row+1)<8) {
+            if (board.board[tile.row + 1][tile.col - 2].current == null) {
+                result.add(board.board[tile.row + 1][tile.col - 2]);
+            } else if (board.board[tile.row + 1][tile.col - 2].current.getColour() != colour) {
+                result.add(board.board[tile.row + 2][tile.col - 2]);
+            }
+        }
+        //1 left, 2 up
+        if((tile.col-1)>=0 && (tile.row-2)>=0){
+            if(board.board[tile.row-2][tile.col-1].current==null){
+                result.add(board.board[tile.row-2][tile.col-1]);
+            } else if(board.board[tile.row-2][tile.col-1].current.getColour()!=colour){
+                result.add(board.board[tile.row-2][tile.col-1]);
+            }
+        }
+        //1 left, 2 down
+        if((tile.col-1)>=0 && (tile.row+2)<8){
+            if(board.board[tile.row+2][tile.col-1].current==null){
+                result.add(board.board[tile.row+2][tile.col-1]);
+            } else if(board.board[tile.row+2][tile.col-1].current.getColour()!=colour){
+                result.add(board.board[tile.row+2][tile.col-1]);
+            }
+        }
+        //2 right, 1 up
+        if((tile.col+2)<8 && (tile.row-1)>=0){
+            if(board.board[tile.row-1][tile.col+2].current==null){
+                result.add(board.board[tile.row-1][tile.col+2]);
+            } else if(board.board[tile.row-1][tile.col+2].current.getColour()!=colour){
+                result.add(board.board[tile.row-1][tile.col+2]);
+            }
+        }
+        //2 left, 1 down
+        if((tile.col+2)<8 && (tile.row+1)<8) {
+            if (board.board[tile.row + 1][tile.col + 2 ].current == null) {
+                result.add(board.board[tile.row + 1][tile.col + 2]);
+            } else if (board.board[tile.row + 1][tile.col + 2].current.getColour() != colour) {
+                result.add(board.board[tile.row + 2][tile.col + 2]);
+            }
+        }
+        //1 left, 2 up
+        if((tile.col+1)<8 && (tile.row-2)>=0){
+            if(board.board[tile.row-2][tile.col+1].current==null){
+                result.add(board.board[tile.row-2][tile.col+1]);
+            } else if(board.board[tile.row-2][tile.col+1].current.getColour()!=colour){
+                result.add(board.board[tile.row-2][tile.col+1]);
+            }
+        }
+        //1 left, 2 down
+        if((tile.col+1)<8 && (tile.row+2)<8){
+            if(board.board[tile.row+2][tile.col+1].current==null){
+                result.add(board.board[tile.row+2][tile.col+1]);
+            } else if(board.board[tile.row+2][tile.col+1].current.getColour()!=colour){
+                result.add(board.board[tile.row+2][tile.col+1]);
+            }
+        }
         return result;
     }
 

@@ -9,8 +9,8 @@ public class Game {
     public static void main(String[] args){
 //        Game g = new Game();
         Board b = new Board();
-        b.addPiece('h',0,4,5);
-        b.addPiece('h',1,3,4);
+        b.addPiece('h',0,3,3);
+        b.addPiece('h',1,8,4);
 //        b.addPiece('q',1,8,5);
 //        b.addPiece('q',1,3,4);
         b.print();
