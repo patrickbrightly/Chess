@@ -12,4 +12,5 @@ public interface Piece {
     public int getColour();             //gets the colour of the piece
     public Tile getTile();              //gets the tile the piece is on
     public void capture(Tile moveTo);  //returns a captured piece
+    public int getHValue();             //Returns the heuristic value for that piece
 }

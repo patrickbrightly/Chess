@@ -109,4 +109,20 @@ public class Board {
             System.out.println();
         }
     }
+
+    /**
+     * This function evaluates the board. + is in favour or white, - in favour of black
+     * @return board value
+     * Method adapted (simplified) from Shannon (1950), proper citation needed
+     */
+    public int evalutateBoard(){
+        int result = 0;
+        for(Piece p: whitePieces){
+            result = result + p.getHValue();
+        }
+        for(Piece p: blackPieces){
+            result = result - p.getHValue();
+        }
+        return result;
+    }
 }

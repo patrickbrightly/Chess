@@ -31,7 +31,6 @@ public class Game {
                 Piece selected = null;
                 try {
                     if (board.whitePieces.contains(board.board[row][col].current)) {
-                        System.out.println("VALID");
                         selected = board.board[row][col].current;
                     } else {
                         System.out.println("This is not a valid piece, try again");
@@ -42,7 +41,6 @@ public class Game {
                     row = in.nextInt() - 1;
                     col = in.nextInt() - 1;
                     if (selected.getMoves().contains(board.board[row][col])) {
-                        System.out.println("VALID");
                         moves.add(new Move(selected, board.board[row][col]));
                         validMove = true;
                     } else {
@@ -53,7 +51,7 @@ public class Game {
                 }
             }
             board.print();
-            System.out.println("White played");
+            System.out.println("White played - HVal = "+board.evalutateBoard());
             //Check for check
                 //check for checkmate
             //Select a piece
@@ -67,7 +65,6 @@ public class Game {
                 Piece selected = null;
                 try {
                     if (board.blackPieces.contains(board.board[row][col].current)) {
-                        System.out.println("VALID");
                         selected = board.board[row][col].current;
                     } else {
                         System.out.println("This is not a valid piece, try again");
@@ -78,7 +75,6 @@ public class Game {
                     row = in.nextInt() - 1;
                     col = in.nextInt() - 1;
                     if (selected.getMoves().contains(board.board[row][col])) {
-                        System.out.println("VALID");
                         moves.add(new Move(selected, board.board[row][col]));
                         validMove = true;
                     } else {
@@ -89,7 +85,7 @@ public class Game {
                 }
             }
             board.print();
-            System.out.println("Black played");
+            System.out.println("Black played - HVal = "+board.evalutateBoard());
             //Check for check
             //check for checkmate
         }

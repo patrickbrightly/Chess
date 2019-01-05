@@ -5,6 +5,7 @@ public class Knight implements Piece {
     Tile tile;      //the tile the piece is on
     int colour;     //the colour of the piece
     String name;    //the name of the piece (for ASCII representation)
+    int value = 4;  //The base value of the piece
 
     /**
      * This constructor creates a knight
@@ -153,5 +154,16 @@ public class Knight implements Piece {
             board.whitePieces.remove(p);
         }
         board.pieces.remove(p);
+    }
+
+    /**
+     * This method returns the value of the piece in question
+     * @return heuristic value
+     */
+    public int getHValue(){
+        int result = 0;
+        result = getMoves().size();
+        result = value*result;
+        return result;
     }
 }
