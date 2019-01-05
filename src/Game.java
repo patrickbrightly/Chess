@@ -1,27 +1,102 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
 /**
  *
  * This is the main class that starts the game and allows players to interact with the game mechanics
  *
  */
 public class Game {
-    Tile[] board;  //The board which contains a number of board positions
+    Board board;
+    boolean gameOver;
+    LinkedList<Move> moves;
+    Scanner in;
+
+    public Game() {
+        in = new Scanner(System.in);
+        moves = new LinkedList<Move>();
+        gameOver = false;
+        board = setStandardBoard();
+        board.print();
+        //Game loop
+        while (!gameOver) {
+            //white turn
+            boolean validMove = false;
+            while (!validMove) {
+                //Select a piece
+                System.out.println("Which piece would you like to move?");
+                System.out.println("Row (1-8) then Col (1-8)");
+                int row = in.nextInt() - 1;
+                int col = in.nextInt() - 1;
+                Piece selected = null;
+                try {
+                    if (board.whitePieces.contains(board.board[row][col].current)) {
+                        System.out.println("VALID");
+                        selected = board.board[row][col].current;
+                    } else {
+                        System.out.println("This is not a valid piece, try again");
+                    }
+                    //select a destination
+                    System.out.println("Where to?");
+                    System.out.println("Row (1-8) then Column (1-8)");
+                    row = in.nextInt() - 1;
+                    col = in.nextInt() - 1;
+                    if (selected.getMoves().contains(board.board[row][col])) {
+                        System.out.println("VALID");
+                        moves.add(new Move(selected, board.board[row][col]));
+                        validMove = true;
+                    } else {
+                        System.out.println("Not a valid move, try again");
+                    }
+                } catch (Exception e) {
+                    System.out.println("not a valid piece, try again");
+                }
+            }
+            board.print();
+            System.out.println("White played");
+            //Check for check
+                //check for checkmate
+            //Select a piece
+            validMove = false;
+            while (!validMove) {
+                //Select a piece
+                System.out.println("Which piece would you like to move?");
+                System.out.println("Row (1-8) then Col (1-8)");
+                int row = in.nextInt() - 1;
+                int col = in.nextInt() - 1;
+                Piece selected = null;
+                try {
+                    if (board.blackPieces.contains(board.board[row][col].current)) {
+                        System.out.println("VALID");
+                        selected = board.board[row][col].current;
+                    } else {
+                        System.out.println("This is not a valid piece, try again");
+                    }
+                    //select a destination
+                    System.out.println("Where to?");
+                    System.out.println("Row (1-8) then Column (1-8)");
+                    row = in.nextInt() - 1;
+                    col = in.nextInt() - 1;
+                    if (selected.getMoves().contains(board.board[row][col])) {
+                        System.out.println("VALID");
+                        moves.add(new Move(selected, board.board[row][col]));
+                        validMove = true;
+                    } else {
+                        System.out.println("Not a valid move, try again");
+                    }
+                } catch (Exception e) {
+                    System.out.println("not a valid piece, try again");
+                }
+            }
+            board.print();
+            System.out.println("Black played");
+            //Check for check
+            //check for checkmate
+        }
+    }
 
     public static void main(String[] args){
-//        Game g = new Game();
-        Board b = new Board();
-        b.addPiece('h',0,3,3);
-        b.addPiece('q',1,1,3);
-//        b.addPiece('q',1,3,4);
-        b.print();
-        System.out.println();
-        new Move(b.pieces.getFirst(),b.board[1][0]);
-        b.print();
-        System.out.println();
-        new Move(b.pieces.getFirst(),b.board[0][2]);
-        b.print();
-        System.out.println();
-        new Move(b.pieces.getFirst(),b.board[0][4]);
-        b.print();
+        Game g = new Game();
     }
 
     /**
