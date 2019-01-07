@@ -4,7 +4,7 @@
 public class Tile {
     int col; //the column of the piece
     int row; //the row of the piece
-    String name; //the name of the position
+    String name; //the name of the position (row# + column letter)
     Piece current;  //the current piece on this tile
 
     /**
@@ -16,7 +16,7 @@ public class Tile {
         this.col = col;
         this.row = row;
         current = null;
-        name = (this.row+1)+""+(char)(this.col+65);
+        name = (this.row+1)+""+(char)(this.col+65); //column letters A-H
     }
 
     /**
