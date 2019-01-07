@@ -1,0 +1,15 @@
+-Getter and Setters
+-GUI button movement
+-GUI integration
+	-GUI Side
+	-Mechanics cleanup side
+-Mechanics
+	-Check
+		-Checkmate
+	-Promotion
+	-Castling
+	-En Passent
+-Minimax
+	-Generate new boards (how to do)
+	-Pass boards back
+	-How to hold the move to make
