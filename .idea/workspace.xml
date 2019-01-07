@@ -3,17 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="42e9333a-f1e7-4b36-8c8c-b7a3a60a7c47" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChessMechanics/Tile.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,7 +57,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="107" />
+          <entry key="JAVA" value="108" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -90,7 +79,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="15632" />
+          <entry key="JAVA" value="15633" />
           <entry key="PLAIN_TEXT" value="551" />
         </counts>
       </usages-collector>
@@ -107,11 +96,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+            <state relative-caret-position="163">
+              <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+              <folding>
+                <element signature="e#870#871#0" expanded="true" />
+                <element signature="e#905#906#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Move.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -119,8 +121,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="26" column="5" selection-start-line="16" selection-start-column="18" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="198">
+              <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -217,7 +219,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Patrick/Desktop/Chess/src/Move.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546893572183" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546895282912" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ChessGUI" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -376,7 +378,14 @@
       <option name="project" value="LOCAL" />
       <updated>1546892424928</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Working on Promotion of Pawn">
+      <created>1546893663128</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1546893663128</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -392,14 +401,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49932885" weight="0.32907802" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986577" visible="true" weight="0.41985816" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986577" weight="0.41985816" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50067115" side_tool="true" weight="0.32907802" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.27801418" />
+      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.27801418" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49946696" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -657,9 +666,6 @@
     <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Pawn.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Move.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Knight.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -676,17 +682,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Board.java">
+    <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="26" column="5" selection-start-line="16" selection-start-column="18" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="163">
+          <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+          <folding>
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#905#906#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+        <state relative-caret-position="198">
+          <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChessMechanics/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
         </state>
       </provider>
     </entry>
