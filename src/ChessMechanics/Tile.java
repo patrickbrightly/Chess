@@ -1,3 +1,5 @@
+package ChessMechanics;
+
 /**
  * These are the spaces on the board.
  */

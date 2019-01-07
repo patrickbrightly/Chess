@@ -1,3 +1,5 @@
+package ChessMechanics;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -19,11 +21,16 @@ public class Game {
 //        board = setStandardBoard();
         board = new Board();
         board.addPiece('p',0,2,2);
-
         board.addPiece('p',1,1,1);
         board.print();
         //Game loop
         mainLoop();
+//        for(int i=0;i<8;i++){
+//            for(int j=0;j<8;j++){
+//                System.out.print(board.board[i][j].name+"\t");
+//            }
+//            System.out.println();
+//        }
     }
 
     public static void main(String[] args){

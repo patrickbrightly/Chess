@@ -1,3 +1,5 @@
+package ChessMechanics;
+
 import java.util.Scanner;
 
 /**
@@ -11,7 +13,7 @@ public class Move {
     Tile to;        //the tile it moved to
     Scanner in;
 
-    public Move(Piece piece, Tile moveTo,Board board, Scanner in){
+    public Move(Piece piece, Tile moveTo, Board board, Scanner in){
         this.board = board;
         this.piece = piece;
         this.from = piece.getTile();

@@ -1,3 +1,5 @@
+package ChessMechanics;
+
 import java.util.LinkedList;
 
 public class King implements Piece {
@@ -57,7 +59,7 @@ public class King implements Piece {
         for (Tile t: getMoves()
         ) {
             if(t.current!=null){
-                if(t.current.getClass()==King.class && t.current.getColour()!=colour){
+                if(t.current.getClass()== King.class && t.current.getColour()!=colour){
                     result = true;
                     break;
                 }

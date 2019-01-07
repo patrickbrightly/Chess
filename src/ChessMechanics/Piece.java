@@ -1,3 +1,5 @@
+package ChessMechanics;
+
 import java.util.LinkedList;
 
 /**

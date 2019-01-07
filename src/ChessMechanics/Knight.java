@@ -1,6 +1,6 @@
+package ChessMechanics;
+
 import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Scanner;
 
 public class Knight implements Piece {
     Board board;    //the board the piece is on
@@ -112,7 +112,7 @@ public class Knight implements Piece {
         for (Tile t: getMoves()
         ) {
             if(t.current!=null){
-                if(t.current.getClass()==King.class && t.current.getColour()!=colour){
+                if(t.current.getClass()== King.class && t.current.getColour()!=colour){
                     result = true;
                     break;
                 }

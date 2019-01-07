@@ -1,5 +1,6 @@
+package ChessMechanics;
+
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * This class is the board itself and contains all the positions for the chess board
