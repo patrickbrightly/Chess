@@ -33,7 +33,9 @@ public class Board {
      * @param row is the row
      * @param col is the column
      */
-    public void addPiece(char piece,int colour,int row, int col){
+    public Piece addPiece(char piece,int colour,int row, int col){
+        System.out.println("adding "+piece);
+        Piece result = null;
         switch (piece){ //determines which piece to place
             case 'p':
                 Pawn p = new Pawn(colour,this);
@@ -44,6 +46,7 @@ public class Board {
                 } else {
                     whitePieces.add(p);
                 }
+                result = p;
                 break;
             case 'r':
                 Rook r = new Rook(colour,this);
@@ -54,16 +57,21 @@ public class Board {
                 } else {
                     whitePieces.add(r);
                 }
+                result = r;
                 break;
             case 'h':
+                System.out.println("adding h");
                 Knight h = new Knight(colour,this);
+                System.out.println("new knight name " +h.name);
                 board[row-1][col-1].addPiece(h);
+                System.out.println("new knight: "+board[row-1][col-1]);
                 pieces.add(h);
                 if(colour==0){
                     blackPieces.add(h);
                 } else {
                     whitePieces.add(h);
                 }
+                result = h;
                 break;
             case 'b':
                 Bishop b = new Bishop(colour,this);
@@ -74,6 +82,7 @@ public class Board {
                 } else {
                     whitePieces.add(b);
                 }
+                result = b;
                 break;
             case 'k':
                 King k = new King(colour,this);
@@ -84,6 +93,7 @@ public class Board {
                 } else {
                     whitePieces.add(k);
                 }
+                result = k;
                 break;
             case 'q':
                 Queen q = new Queen(colour,this);
@@ -94,8 +104,10 @@ public class Board {
                 } else {
                     whitePieces.add(q);
                 }
+                result = q;
                 break;
         }
+        return result;
     }
 
     /**

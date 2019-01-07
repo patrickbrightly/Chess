@@ -166,4 +166,10 @@ public class Knight implements Piece {
         result = value*result;
         return result;
     }
+
+    /**
+     * sets the piece to moved
+     */
+    public void setMoved(){
+    }
 }

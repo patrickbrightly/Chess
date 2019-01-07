@@ -155,4 +155,10 @@ public class Bishop implements Piece {
         result = value*result;
         return result;
     }
+
+    /**
+     * sets the piece to moved
+     */
+    public void setMoved(){
+    }
 }

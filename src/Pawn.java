@@ -17,7 +17,7 @@ public class Pawn implements Piece {
         this.colour = colour;
         name = "p"+colour;
         this.board = board;
-        moved = false;
+        moved = true;
     }
 
     /**
@@ -137,4 +137,12 @@ public class Pawn implements Piece {
         result = value*result;
         return result;
     }
+
+    /**
+     * sets the piece to moved
+     */
+    public void setMoved(){
+        moved = true;
+    }
+
 }

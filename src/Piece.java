@@ -13,4 +13,5 @@ public interface Piece {
     public Tile getTile();              //gets the tile the piece is on
     public void capture(Tile moveTo);  //returns a captured piece
     public int getHValue();             //Returns the heuristic value for that piece
+    public void setMoved();              //sets the piece to moved
 }

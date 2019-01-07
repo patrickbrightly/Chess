@@ -16,9 +16,21 @@ public class Game {
         in = new Scanner(System.in);
         moves = new LinkedList<Move>();
         gameOver = false;
-        board = setStandardBoard();
+//        board = setStandardBoard();
+        board = new Board();
+        board.addPiece('p',0,2,2);
+
+        board.addPiece('p',1,1,1);
         board.print();
         //Game loop
+        mainLoop();
+    }
+
+    public static void main(String[] args){
+        Game g = new Game();
+    }
+
+    public void mainLoop(){
         while (!gameOver) {
             //white turn
             boolean validMove = false;
@@ -41,19 +53,20 @@ public class Game {
                     row = in.nextInt() - 1;
                     col = in.nextInt() - 1;
                     if (selected.getMoves().contains(board.board[row][col])) {
-                        moves.add(new Move(selected, board.board[row][col]));
+                        Move move =new Move(selected, board.board[row][col],board,in);
+                        moves.add(move);
                         validMove = true;
                     } else {
                         System.out.println("Not a valid move, try again");
                     }
                 } catch (Exception e) {
+                    System.out.println(e);
                     System.out.println("not a valid piece, try again");
                 }
             }
             board.print();
             System.out.println("White played - HVal = "+board.evalutateBoard());
-            //Check for check
-                //check for checkmate
+            //TODO Check for check/mate
             //Select a piece
             validMove = false;
             while (!validMove) {
@@ -75,7 +88,8 @@ public class Game {
                     row = in.nextInt() - 1;
                     col = in.nextInt() - 1;
                     if (selected.getMoves().contains(board.board[row][col])) {
-                        moves.add(new Move(selected, board.board[row][col]));
+                        Move move =new Move(selected, board.board[row][col],board,in);
+                        moves.add(move);
                         validMove = true;
                     } else {
                         System.out.println("Not a valid move, try again");
@@ -86,13 +100,8 @@ public class Game {
             }
             board.print();
             System.out.println("Black played - HVal = "+board.evalutateBoard());
-            //Check for check
-            //check for checkmate
+            //TODO Check for check
         }
-    }
-
-    public static void main(String[] args){
-        Game g = new Game();
     }
 
     /**
