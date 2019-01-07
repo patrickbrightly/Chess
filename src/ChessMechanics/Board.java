@@ -35,7 +35,6 @@ public class Board {
      * @param col is the column
      */
     public Piece addPiece(char piece,int colour,int row, int col){
-        System.out.println("adding "+piece);
         Piece result = null;
         switch (piece){ //determines which piece to place
             case 'p':
@@ -61,11 +60,8 @@ public class Board {
                 result = r;
                 break;
             case 'h':
-                System.out.println("adding h");
                 Knight h = new Knight(colour,this);
-                System.out.println("new knight name " +h.name);
                 board[row-1][col-1].addPiece(h);
-                System.out.println("new knight: "+board[row-1][col-1]);
                 pieces.add(h);
                 if(colour==0){
                     blackPieces.add(h);
@@ -136,6 +132,15 @@ public class Board {
         for(Piece p: blackPieces){
             result = result - p.getHValue();
         }
+        return result;
+    }
+
+    public boolean isCheck(){
+        boolean result = false;
+        //can any black piece cause check?
+
+        //can any white piece cause check?
+
         return result;
     }
 }

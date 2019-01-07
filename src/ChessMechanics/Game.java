@@ -18,10 +18,12 @@ public class Game {
         in = new Scanner(System.in);
         moves = new LinkedList<Move>();
         gameOver = false;
-//        board = setStandardBoard();
+        board = setStandardBoard();
         board = new Board();
-        board.addPiece('p',0,2,2);
-        board.addPiece('p',1,1,1);
+        board.addPiece('k',1,2,2);
+        board.addPiece('q',0,7,1);
+        board.addPiece('p',1,2,3);
+        board.addPiece('b',0,7,3);
         board.print();
         //Game loop
         mainLoop();
@@ -38,6 +40,8 @@ public class Game {
     }
 
     public void mainLoop(){
+        boolean blackCheck = false;
+        boolean whiteCheck = false;
         while (!gameOver) {
             //white turn
             boolean validMove = false;
@@ -73,7 +77,19 @@ public class Game {
             }
             board.print();
             System.out.println("White played - HVal = "+board.evalutateBoard());
-            //TODO Check for check/mate
+            //check for black king check
+            for(Piece p: board.whitePieces){
+                if(p.causesCheck()){
+                    blackCheck = true;
+                    System.out.println("blackcheck"+blackCheck);
+                }
+            }
+            if(blackCheck){
+                System.out.println("Black king is in check");
+                //TODO check for checkmate
+                //check each position that the king can move
+                //check if the capturing pieces can be captured or blocked
+            }
             //Select a piece
             validMove = false;
             while (!validMove) {
@@ -107,7 +123,16 @@ public class Game {
             }
             board.print();
             System.out.println("Black played - HVal = "+board.evalutateBoard());
-            //TODO Check for check
+            for(Piece p: board.blackPieces){
+                if(p.causesCheck()){
+                    whiteCheck = true;
+                    System.out.println("whitecheck"+whiteCheck);
+                }
+            }
+            if(whiteCheck){
+                System.out.println("White king is in check");
+                //TODO check for checkmate
+            }
         }
     }
 
@@ -139,4 +164,6 @@ public class Game {
         }
         return result;
     }
+
+
 }

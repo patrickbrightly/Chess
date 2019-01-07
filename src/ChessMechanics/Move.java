@@ -29,17 +29,23 @@ public class Move {
         }
         if(piece.getName().charAt(0)=='p'){
             if(piece.getColour()==0 && piece.getTile().row==0){
-                    System.out.println("Change your pawn to a new piece");
-                    System.out.println("Queen - q");
-                    System.out.println("Bishop - b");
-                    System.out.println("Rook - r");
-                    System.out.println("Knight - h");
-                    char newPieceChar = in.next().charAt(0);
-                    System.out.println("Character "+ newPieceChar);
-                    //create a new piece, remove the pawn
-                    piece = changePawn(piece,newPieceChar);
-                System.out.println(piece.getName());
-                System.out.println(piece.getTile().name);
+                System.out.println("Change your pawn to a new piece");
+                System.out.println("Queen - q");
+                System.out.println("Bishop - b");
+                System.out.println("Rook - r");
+                System.out.println("Knight - h");
+                char newPieceChar = in.next().charAt(0);
+                //create a new piece, remove the pawn
+                piece = changePawn(piece,newPieceChar);
+            } else if(piece.getColour()==1 && piece.getTile().row==7){
+                System.out.println("Change your pawn to a new piece");
+                System.out.println("Queen - q");
+                System.out.println("Bishop - b");
+                System.out.println("Rook - r");
+                System.out.println("Knight - h");
+                char newPieceChar = in.next().charAt(0);
+                //create a new piece, remove the pawn
+                piece = changePawn(piece,newPieceChar);
             }
         }
     }
@@ -54,7 +60,6 @@ public class Move {
     }
 
     public Piece changePawn(Piece pawn, char newPiece){
-        System.out.println("Start method");
         Piece result = null;
         //set the tile to empty
         pawn.getTile().current = null;
@@ -62,14 +67,11 @@ public class Move {
         board.pieces.remove(pawn);
         if(pawn.getColour()==0){
             board.blackPieces.remove(pawn);
-            System.out.println("Black piece removed");
         } else{
             board.whitePieces.remove(pawn);
-            System.out.println("White piece removed");
         }
         //add a new piece of type specified
-        result = board.addPiece(newPiece,pawn.getColour(),pawn.getTile().row,pawn.getTile().col);
-        System.out.println("New piece" + result.getName());
+        result = board.addPiece(newPiece,pawn.getColour(),pawn.getTile().row+1,pawn.getTile().col+1);
         return result;
     }
 }

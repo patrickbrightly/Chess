@@ -19,7 +19,7 @@ public class Pawn implements Piece {
         this.colour = colour;
         name = "p"+colour;
         this.board = board;
-        moved = true;
+        moved = false;
     }
 
     /**
@@ -47,17 +47,17 @@ public class Pawn implements Piece {
             }
         } else {
             //check the tile 1 ahead, unless at the last row
-            if(tile.row+1>=0 && board.board[tile.row+1][tile.col].current==null) {
+            if(tile.row+1<8 && board.board[tile.row+1][tile.col].current==null) {
                 result.add(board.board[tile.row + 1][tile.col]);
                 //check the second tile ahead only if you haven't moved yet
                 if (!moved && board.board[tile.row + 2][tile.col].current == null) {
                     result.add(board.board[tile.row + 2][tile.col]);
                 }
             }
-            if(tile.row+1>=0 && tile.col-1>=0 && board.board[tile.row+1][tile.col-1].current!=null && board.board[tile.row+1][tile.col-1].current.getColour()!=colour){
+            if(tile.row+1<8 && tile.col-1>=0 && board.board[tile.row+1][tile.col-1].current!=null && board.board[tile.row+1][tile.col-1].current.getColour()!=colour){
                 result.add(board.board[tile.row+1][tile.col-1]);
             }
-            if(tile.row+1>=0 && tile.col+1<8 && board.board[tile.row+1][tile.col+1].current!=null && board.board[tile.row+1][tile.col+1].current.getColour()!=colour){
+            if(tile.row+1<8 && tile.col+1<8 && board.board[tile.row+1][tile.col+1].current!=null && board.board[tile.row+1][tile.col+1].current.getColour()!=colour){
                 result.add(board.board[tile.row+1][tile.col+1]);
             }
         }

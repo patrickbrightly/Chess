@@ -6,7 +6,7 @@
 -Mechanics
 	-Check
 		-Checkmate
-	-Promotion
+	-Promotion (DONE)
 	-Castling
 	-En Passent
 -Minimax
