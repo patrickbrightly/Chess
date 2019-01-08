@@ -1,6 +1,7 @@
 package ChessMechanics;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
  * This class is the board itself and contains all the positions for the chess board
@@ -24,6 +25,85 @@ public class Board {
                 board[i][j] = new Tile(i,j);
             }
         }
+    }
+
+    public Board(Board b, Tile from, Tile to){
+        pieces = new LinkedList<Piece>();
+        blackPieces = new LinkedList<Piece>();
+        whitePieces = new LinkedList<Piece>();
+        board = new Tile[8][8];
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                board[i][j] = new Tile(b.board[i][j]);
+                Piece piece = b.board[i][j].current;
+                if(b.board[i][j].current!=null){
+                    switch (piece.getName().charAt(0)) {
+                        case 'p':
+                            Pawn p = new Pawn(piece.getColour(), this);
+                            p.setMoved();
+                            board[piece.getTile().row][piece.getTile().col].addPiece(p);
+                            pieces.add(p);
+                            if (piece.getColour() == 0) {
+                                blackPieces.add(p);
+                            } else {
+                                whitePieces.add(p);
+                            }
+                            break;
+                        case 'q':
+                            Queen q = new Queen(piece.getColour(), this);
+                            board[piece.getTile().row][piece.getTile().col].addPiece(q);
+                            pieces.add(q);
+                            if (piece.getColour() == 0) {
+                                blackPieces.add(q);
+                            } else {
+                                whitePieces.add(q);
+                            }
+                            break;
+                        case 'k':
+                            King k = new King(piece.getColour(), this);
+                            board[piece.getTile().row][piece.getTile().col].addPiece(k);
+                            pieces.add(k);
+                            if (piece.getColour() == 0) {
+                                blackPieces.add(k);
+                            } else {
+                                whitePieces.add(k);
+                            }
+                            break;
+                        case 'h':
+                            Knight h = new Knight(piece.getColour(), this);
+                            board[piece.getTile().row][piece.getTile().col].addPiece(h);
+                            pieces.add(h);
+                            if (piece.getColour() == 0) {
+                                blackPieces.add(h);
+                            } else {
+                                whitePieces.add(h);
+                            }
+                            break;
+                        case 'b':
+                            Bishop bi = new Bishop(piece.getColour(), this);
+                            board[piece.getTile().row][piece.getTile().col].addPiece(bi);
+                            pieces.add(bi);
+                            if (piece.getColour() == 0) {
+                                blackPieces.add(bi);
+                            } else {
+                                whitePieces.add(bi);
+                            }
+                            break;
+                        case 'r':
+                            Rook r = new Rook(piece.getColour(), this);
+                            board[piece.getTile().row][piece.getTile().col].addPiece(r);
+                            pieces.add(r);
+                            if (piece.getColour() == 0) {
+                                blackPieces.add(r);
+                            } else {
+                                whitePieces.add(r);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        new Move(board[from.row][from.col].current,board[to.row][to.col],this,new Scanner(System.in));
     }
 
     /**
@@ -117,6 +197,7 @@ public class Board {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     /**

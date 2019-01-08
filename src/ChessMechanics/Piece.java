@@ -16,4 +16,4 @@ public interface Piece {
     public void capture(Tile moveTo);  //returns a captured piece
     public int getHValue();             //Returns the heuristic value for that piece
     public void setMoved();              //sets the piece to moved
-}
+ }

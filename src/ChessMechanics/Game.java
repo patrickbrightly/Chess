@@ -20,19 +20,20 @@ public class Game {
         gameOver = false;
         board = setStandardBoard();
         board = new Board();
-        board.addPiece('k',1,2,2);
+//        board.addPiece('k',1,2,2);
         board.addPiece('q',0,7,1);
-        board.addPiece('p',1,2,3);
+//        board.addPiece('b',1,2,3);
         board.addPiece('b',0,7,3);
         board.print();
         //Game loop
-        mainLoop();
+//        mainLoop();
 //        for(int i=0;i<8;i++){
 //            for(int j=0;j<8;j++){
 //                System.out.print(board.board[i][j].name+"\t");
 //            }
 //            System.out.println();
 //        }
+        miniMaxDecision(board);
     }
 
     public static void main(String[] args){
@@ -42,7 +43,9 @@ public class Game {
     public void mainLoop(){
         boolean blackCheck = false;
         boolean whiteCheck = false;
-        while (!gameOver) {
+        boolean blackCheckMate = false;
+        boolean whiteCheckMate = false;
+        while (!blackCheckMate || !whiteCheckMate) {
             //white turn
             boolean validMove = false;
             while (!validMove) {
@@ -85,9 +88,27 @@ public class Game {
                 }
             }
             if(blackCheck){
+                blackCheckMate = true;
+                Piece k=null;//get the black king
+                for(Piece p:board.blackPieces){
+                    if(p.getClass()==King.class){
+                        k = p;
+                    }
+                }
                 System.out.println("Black king is in check");
                 //TODO check for checkmate
-                //check each position that the king can move
+                //check each position that the king can move to
+                //if it can move, then it's not check
+                LinkedList<Tile> whitePieceMoves = new LinkedList<Tile>();
+                for(Piece p : board.whitePieces){
+                    whitePieceMoves.addAll(p.getMoves());
+                }
+                for(Tile t: k.getMoves()){
+
+                    for(Piece p: board.whitePieces){
+
+                    }
+                }
                 //check if the capturing pieces can be captured or blocked
             }
             //Select a piece
@@ -165,5 +186,34 @@ public class Game {
         return result;
     }
 
+    /**
+     * This method takes in a board state
+     * This method is hardcoded for a ply of 3
+     */
+    public Move miniMaxDecision(Board board){
+        Move result = null;
+        int currentPly = 1;
+        LinkedList<Board> frontier = new LinkedList<Board>();
+        for(Piece p:board.blackPieces){
+            for(Tile tile:p.getMoves()){
+                //add the new board to the frontier
+                Board nextBoard = new Board(board,p.getTile(),tile);
+                //move the piece to the tile needed
+                frontier.add(nextBoard);
+            }
+        }
+        for(Board b:frontier){
+            b.print();
+            System.out.println();
+        }
+        //on odd minimize
+        //on even maximize
+
+        return result;
+    }
+
+    public int minimize(){
+        return 0;
+    }
 
 }

@@ -21,6 +21,12 @@ public class Tile {
         name = (this.row+1)+""+(char)(this.col+65); //column letters A-H
     }
 
+    public Tile(Tile t){
+        col = t.col;
+        row = t.row;
+        name = t.name;
+    }
+
     /**
      * This methods checks if there is a piece on this square
      * @return true if there isn't a piece on this tile
