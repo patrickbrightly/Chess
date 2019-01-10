@@ -15,8 +15,8 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents(); // sets font and colours > contains buildlayout which creates component spacing
         setButtonNames();
         addButtonListeners(); //adds listeners
-        game = new Game();    //creating a standard board
-        currentBoard = game.getBoard();
+        game = new Game();    //ASSUMES creating a standard board
+        currentBoard = game.getBoard(); 
         drawBoard(currentBoard); //start game
         //action listener method continues once board is drawm
     }
@@ -32,7 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
                 Tile[][] tileArray = currentBoard.getBoard();  // get the piece from the board
                 char[] startArray = startPosition.getName().toCharArray();
                 pieceFrom = tileArray[startArray[0]-49][Character.getNumericValue(startArray[1])-10].getCurrent();
-                System.out.println("startpos: "+startPosition.getName()); //TODO remove, testing
+                //System.out.println("startpos: "+startPosition.getName()); //TODO remove, testing
                 secondClick = true;  //set flag to designate second click
             } else { //its a second click
                  try {
@@ -40,13 +40,13 @@ public class MainWindow extends javax.swing.JFrame {
                         Tile[][] tileArray = currentBoard.getBoard();  // use board to get end tile
                         char[] endArray = endPosition.getName().toCharArray();
                         tileFrom = tileArray[endArray[0] - 49][Character.getNumericValue(endArray[1]) - 10];
-                        System.out.println("endpos: " + endPosition.getName()); //TODO remove, testing
+                        //System.out.println("endpos: " + endPosition.getName()); //TODO remove, testing
 
                         Move m = new Move(pieceFrom, tileFrom, currentBoard); //move piece to new tile
 
                         ImageIcon empty = new ImageIcon(emptyPiecePath);  //make moved area empty
                         startPosition.setIcon(empty);
-                        currentBoard.print(); //TODO remove, for testing
+                        //currentBoard.print(); //TODO remove, for testing
                         drawBoard(currentBoard);
                  } catch (NullPointerException exception){
                     // do nothing
