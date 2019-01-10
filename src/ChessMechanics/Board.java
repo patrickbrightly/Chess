@@ -224,4 +224,8 @@ public class Board {
 
         return result;
     }
+    
+    public Board getBoard() {
+        return board;
+    }
 }
