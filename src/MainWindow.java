@@ -1,45 +1,74 @@
 package ChessGUI;
 
+import ChessMechanics.*;
 import javax.swing.*;
 import java.lang.*;
 import java.util.*;
 import java.awt.*;
-//import java.awt.event.ActionListener;
 import java.awt.event.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 
 public class MainWindow extends javax.swing.JFrame {
 
     public MainWindow() {
-        setImagePaths();
-        initComponents();
-        addButtonListeners(); //TODO: testing, remove later
-
-
+        setImagePaths(); // set imagepathstrings
+        initComponents(); // sets font and colours > contains buildlayout which creates component spacing
+        setButtonNames();
+        addButtonListeners(); //adds listeners
+        game = new Game();    //creating a standard board
+        currentBoard = game.getBoard();
+        drawBoard(currentBoard); //start game
+        //action listener method continues once board is drawm
     }
 
     /**
-     * class from https://www.youtube.com/watch?v=E-yToUMXQck
+     * Class executes code when buttons are pressed, MAIN LOOP will exist in this method
      */
     private class ButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            JButton buttonClicked = (JButton)e.getSource();
+            //TODO: only for one colour, ie only allow movement of white
+            if(secondClick == false){ // if its a first click
+                startPosition = (JButton)e.getSource();  //set starting button
+                Tile[][] tileArray = currentBoard.getBoard();  // get the piece from the board
+                char[] startArray = startPosition.getName().toCharArray();
+                pieceFrom = tileArray[startArray[0]-49][Character.getNumericValue(startArray[1])-10].getCurrent();
+                System.out.println("startpos: "+startPosition.getName()); //TODO remove, testing
+                secondClick = true;  //set flag to designate second click
+            } else { //its a second click
+                 try {
+                        endPosition = (JButton) e.getSource(); //set end button
+                        Tile[][] tileArray = currentBoard.getBoard();  // use board to get end tile
+                        char[] endArray = endPosition.getName().toCharArray();
+                        tileFrom = tileArray[endArray[0] - 49][Character.getNumericValue(endArray[1]) - 10];
+                        System.out.println("endpos: " + endPosition.getName()); //TODO remove, testing
 
-            String buttonName = buttonClicked.getText();
-            System.out.println(buttonName+"button pressed");
-            //TODO
-            // get tilename
-            //make move if legal
-            //update board
-            //write move in text field
-            //OPPONENT MOVE
-            //write opponent move in text field
-            //redraw board
+                        Move m = new Move(pieceFrom, tileFrom, currentBoard); //move piece to new tile
+
+                        ImageIcon empty = new ImageIcon(emptyPiecePath);  //make moved area empty
+                        startPosition.setIcon(empty);
+                        currentBoard.print(); //TODO remove, for testing
+                        drawBoard(currentBoard);
+                 } catch (NullPointerException exception){
+                    // do nothing
+                 }
+                secondClick = false; //reset flag
+                pieceFrom = null; //reset variables
+                tileFrom = null;
+                startPosition = null;
+                endPosition = null;
+            }
+
+            //TODO:
+            //integrate with AI-OPPONENT
+            //print board, new game buttons etc
+
+
         }
     }
 
+    /**
+     * adds action listeners to every tile.
+     */
     private void addButtonListeners(){
         newGameButton.addActionListener(new ButtonListener());
         endGameButton.addActionListener(new ButtonListener());
@@ -49,6 +78,71 @@ public class MainWindow extends javax.swing.JFrame {
         A5.addActionListener(new ButtonListener());
         A4.addActionListener(new ButtonListener());
         A3.addActionListener(new ButtonListener());
+        A2.addActionListener(new ButtonListener());
+        A1.addActionListener(new ButtonListener());
+
+        B8.addActionListener(new ButtonListener());
+        B7.addActionListener(new ButtonListener());
+        B6.addActionListener(new ButtonListener());
+        B5.addActionListener(new ButtonListener());
+        B4.addActionListener(new ButtonListener());
+        B3.addActionListener(new ButtonListener());
+        B2.addActionListener(new ButtonListener());
+        B1.addActionListener(new ButtonListener());
+
+        C8.addActionListener(new ButtonListener());
+        C7.addActionListener(new ButtonListener());
+        C6.addActionListener(new ButtonListener());
+        C5.addActionListener(new ButtonListener());
+        C4.addActionListener(new ButtonListener());
+        C3.addActionListener(new ButtonListener());
+        C2.addActionListener(new ButtonListener());
+        C1.addActionListener(new ButtonListener());
+
+        D8.addActionListener(new ButtonListener());
+        D7.addActionListener(new ButtonListener());
+        D6.addActionListener(new ButtonListener());
+        D5.addActionListener(new ButtonListener());
+        D4.addActionListener(new ButtonListener());
+        D3.addActionListener(new ButtonListener());
+        D2.addActionListener(new ButtonListener());
+        D1.addActionListener(new ButtonListener());
+
+        E8.addActionListener(new ButtonListener());
+        E7.addActionListener(new ButtonListener());
+        E6.addActionListener(new ButtonListener());
+        E5.addActionListener(new ButtonListener());
+        E4.addActionListener(new ButtonListener());
+        E3.addActionListener(new ButtonListener());
+        E2.addActionListener(new ButtonListener());
+        E1.addActionListener(new ButtonListener());
+
+        F8.addActionListener(new ButtonListener());
+        F7.addActionListener(new ButtonListener());
+        F6.addActionListener(new ButtonListener());
+        F5.addActionListener(new ButtonListener());
+        F4.addActionListener(new ButtonListener());
+        F3.addActionListener(new ButtonListener());
+        F2.addActionListener(new ButtonListener());
+        F1.addActionListener(new ButtonListener());
+
+        G8.addActionListener(new ButtonListener());
+        G7.addActionListener(new ButtonListener());
+        G6.addActionListener(new ButtonListener());
+        G5.addActionListener(new ButtonListener());
+        G4.addActionListener(new ButtonListener());
+        G3.addActionListener(new ButtonListener());
+        G2.addActionListener(new ButtonListener());
+        G1.addActionListener(new ButtonListener());
+
+        H8.addActionListener(new ButtonListener());
+        H7.addActionListener(new ButtonListener());
+        H6.addActionListener(new ButtonListener());
+        H5.addActionListener(new ButtonListener());
+        H4.addActionListener(new ButtonListener());
+        H3.addActionListener(new ButtonListener());
+        H2.addActionListener(new ButtonListener());
+        H1.addActionListener(new ButtonListener());
     };
 
     /**
@@ -436,8 +530,8 @@ public class MainWindow extends javax.swing.JFrame {
     }; //buildLayout
 
     /**
-     * places piece images in a standard chess layout
-     * pieces retrieved from Wikimedia Commons, a free media repository
+     * places piece images in a standard chess layout - UNUSED
+     * pieces retrieved from Wikimedia Commons, 'a free media repository'
      * https://commons.wikimedia.org/wiki/Category:PNG_chess_pieces/Standard_transparent
      */
     private void createDefaultBoard(){ //for testing, will eventually take in the starting board, more general
@@ -453,6 +547,7 @@ public class MainWindow extends javax.swing.JFrame {
         ImageIcon q = new ImageIcon(whiteQueenPath);
         ImageIcon k = new ImageIcon(whiteKingPath);
         ImageIcon p = new ImageIcon(whitePawnPath);
+        ImageIcon empty = new ImageIcon(emptyPiecePath);
 
 
         A8.setIcon(R);
@@ -492,17 +587,15 @@ public class MainWindow extends javax.swing.JFrame {
 
     /**
      * draws the board based on the passed board file
-
-    private void drawBoard(Board board){ //TODO: test clear
-        this.removeAll();// clear previous board
-        //read board and populate tiles
-        for (int i=0; i<8; i++){
-            for (int j=0;j<8;j++) {
-                placePiece(board[i][j].getPiece, i+j);
-            }
-        }
-    }
      */
+    private void drawBoard(Board board){ //TODO: test clear
+        //this.removeAll();// clear previous board ???
+        //removeAll(); // TODO: clear before draw !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        for (int i=0; i<board.getPieces().size(); i++){
+            mapImage(board.getPieces().get(i).getTile().getCurrent());
+        }
+    }; //drawBoard
+
 
     /**
      * main method that initializes buttons
@@ -898,67 +991,219 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         buildLayout();
-        createDefaultBoard(); //testing
     }; //initComponents
 
     /**
-     * maps piece name to image files and places them on board
-
-    private void placePiece(Piece piece, Tile tile) {
-        switch (piece) { //determines which piece to place
-            case 'p': //pawn
-                if (piece.getColour == 0) {
-                    ImageIcon P = new ImageIcon(blackPawnPath);
-                    A4.setIcon(P); //TODO: this, left off here  ..example
-
-                } else {
-                    ImageIcon p = new ImageIcon(whitePawnPath);
-
-                }
-                break;
-            case 'r': //rook
-                if (piece.getColour == 0) {
-                    ImageIcon R = new ImageIcon(blackRookPath);
-
-                } else {
-                    ImageIcon r = new ImageIcon(whiteRookPath);
-                }
-                break;
-            case 'h': //knight
-                if (piece.getColour == 0) {
-                    ImageIcon N = new ImageIcon(blackKnightPath);
-                } else {
-                    ImageIcon n = new ImageIcon(whiteKnightPath);
-                }
-                break;
-            case 'b': //bishop
-                if (piece.getColour == 0) {
-                    ImageIcon B = new ImageIcon(blackBishopPath);
-                } else {
-                    ImageIcon b = new ImageIcon(whiteBishopPath);
-                }
-                break;
-            case 'k': //king
-                if (piece.getColour == 0) {
-                    ImageIcon K = new ImageIcon(blackKingPath);
-                } else {
-                    ImageIcon k = new ImageIcon(whiteKingPath);
-                }
-                break;
-            case 'q':
-                if (piece.getColour == 0) {
-                    ImageIcon Q = new ImageIcon(blackQueenPath);
-                } else {
-                    ImageIcon q = new ImageIcon(whiteQueenPath);
-                }
-                break;
-        }
-
-
-
-    }; //placePiece
+     * Maps game board names to UI buttons, used for placing pieces onto correct tiles.
+     * @param pieceToPlace The Piece which button name needs to be returned.
+     * @return The button/UI tile which the piece will be placed on.
      */
+    private JButton mapButton(Piece pieceToPlace){
+        switch (pieceToPlace.getTile().getName()) {
+            case "1A":
+                return A8;
+            case "2A":
+                return A7;
+            case "3A":
+                return A6;
+            case "4A":
+                return A5;
+            case "5A":
+                return A4;
+            case "6A":
+                return A3;
+            case "7A":
+                return A2;
+            case "8A":
+                return A1;
+            case "1B":
+                return B8;
+            case "2B":
+                return B7;
+            case "3B":
+                return B6;
+            case "4B":
+                return B5;
+            case "5B":
+                return B4;
+            case "6B":
+                return B3;
+            case "7B":
+                return B2;
+            case "8B":
+                return B1;
+            case "1C":
+                return C8;
+            case "2C":
+                return C7;
+            case "3C":
+                return C6;
+            case "4C":
+                return C5;
+            case "5C":
+                return C4;
+            case "6C":
+                return C3;
+            case "7C":
+                return C2;
+            case "8C":
+                return C1;
+            case "1D":
+                return D8;
+            case "2D":
+                return D7;
+            case "3D":
+                return D6;
+            case "4D":
+                return D5;
+            case "5D":
+                return D4;
+            case "6D":
+                return D3;
+            case "7D":
+                return D2;
+            case "8D":
+                return D1;
+            case "1E":
+                return E8;
+            case "2E":
+                return E7;
+            case "3E":
+                return E6;
+            case "4E":
+                return E5;
+            case "5E":
+                return E4;
+            case "6E":
+                return E3;
+            case "7E":
+                return E2;
+            case "8E":
+                return E1;
+            case "1F":
+                return F8;
+            case "2F":
+                return F7;
+            case "3F":
+                return F6;
+            case "4F":
+                return F5;
+            case "5F":
+                return F4;
+            case "6F":
+                return F3;
+            case "7F":
+                return F2;
+            case "8F":
+                return F1;
+            case "1G":
+                return G8;
+            case "2G":
+                return G7;
+            case "3G":
+                return G6;
+            case "4G":
+                return G5;
+            case "5G":
+                return G4;
+            case "6G":
+                return G3;
+            case "7G":
+                return G2;
+            case "8G":
+                return G1;
+            case "1H":
+                return H8;
+            case "2H":
+                return H7;
+            case "3H":
+                return H6;
+            case "4H":
+                return H5;
+            case "5H":
+                return H4;
+            case "6H":
+                return H3;
+            case "7H":
+                return H2;
+            case "8H":
+                return H1;
+            default:
+                throw new NullPointerException("mapButton invalid");
+        }
+    };
 
+    /**
+     * Maps the piece name to matching image files and places images on the buttons of the board.
+     */
+    private void mapImage(Piece piece) {
+
+        switch (piece.getName()) { //determines which piece to place
+            case "p0": //pawn
+                ImageIcon P = new ImageIcon(blackPawnPath);
+                mapButton(piece).setIcon(P);
+                break;
+            case "r0": //rook
+                ImageIcon R = new ImageIcon(blackRookPath);
+                mapButton(piece).setIcon(R);
+                break;
+            case "h0": //knight
+                ImageIcon N = new ImageIcon(blackKnightPath);
+                mapButton(piece).setIcon(N);
+                break;
+            case "b0": //bishop
+                ImageIcon B = new ImageIcon(blackBishopPath);
+                mapButton(piece).setIcon(B);
+                break;
+            case "k0": //king
+                ImageIcon K = new ImageIcon(blackKingPath);
+                mapButton(piece).setIcon(K);
+                break;
+            case "q0": //queen
+                ImageIcon Q = new ImageIcon(blackQueenPath);
+                mapButton(piece).setIcon(Q);
+                break;
+            case "p1": //pawn
+                ImageIcon p = new ImageIcon(whitePawnPath);
+                mapButton(piece).setIcon(p);
+                break;
+            case "r1": //rook
+                ImageIcon r = new ImageIcon(whiteRookPath);
+                mapButton(piece).setIcon(r);
+                break;
+            case "h1": //knight
+                ImageIcon n = new ImageIcon(whiteKnightPath);
+                mapButton(piece).setIcon(n);
+                break;
+            case "b1": //bishop
+                ImageIcon b = new ImageIcon(whiteBishopPath);
+                mapButton(piece).setIcon(b);
+                break;
+            case "k1": //king
+                ImageIcon k = new ImageIcon(whiteKingPath);
+                mapButton(piece).setIcon(k);
+                break;
+            case "q1": //queen
+                ImageIcon q = new ImageIcon(whiteQueenPath);
+                mapButton(piece).setIcon(q);
+                break;
+            case "--": //empty TODO create an empty case TESTTTTTTT
+                ImageIcon empty = new ImageIcon(emptyPiecePath);
+                mapButton(piece).setIcon(empty);
+
+        }
+    }; //placePiece
+
+    private void newGameButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        game = new Game();    //creating a standard board
+        currentBoard = game.getBoard();
+        drawBoard(currentBoard); //start game
+    }
+
+    /**
+     * This method provides a localized place to change/set image PNG paths.
+     */
     private void setImagePaths(){ //TODO: cupdate relative paths with master
         blackRookPath = "..\\ChessGUI\\blackRook.png";
         blackKnightPath = "..\\ChessGUI\\blackKnight.png";
@@ -972,7 +1217,95 @@ public class MainWindow extends javax.swing.JFrame {
         whiteQueenPath = "..\\ChessGUI\\whiteQueen.png";
         whiteKingPath = "..\\ChessGUI\\whiteKing.png";
         whitePawnPath = "..\\ChessGUI\\whitePawn.png";
+        emptyPiecePath = "..\\ChessGUI\\transparent.png";
     }
+
+    /**
+     * setting the names of the buttons, mapped to representation in
+     */
+    private void setButtonNames(){
+        A8.setName("1A");
+        A7.setName("2A");
+        A6.setName("3A");
+        A5.setName("4A");
+        A4.setName("5A");
+        A3.setName("6A");
+        A2.setName("7A");
+        A1.setName("8A");
+
+        B8.setName("1B");
+        B7.setName("2B");
+        B6.setName("3B");
+        B5.setName("4B");
+        B4.setName("5B");
+        B3.setName("6B");
+        B2.setName("7B");
+        B1.setName("8B");
+
+        C8.setName("1C");
+        C7.setName("2C");
+        C6.setName("3C");
+        C5.setName("4C");
+        C4.setName("5C");
+        C3.setName("6C");
+        C2.setName("7C");
+        C1.setName("8C");
+
+        D8.setName("1D");
+        D7.setName("2D");
+        D6.setName("3D");
+        D5.setName("4D");
+        D4.setName("5D");
+        D3.setName("6D");
+        D2.setName("7D");
+        D1.setName("8D");
+
+        E8.setName("1E");
+        E7.setName("2E");
+        E6.setName("3E");
+        E5.setName("4E");
+        E4.setName("5E");
+        E3.setName("6E");
+        E2.setName("7E");
+        E1.setName("8E");
+
+        F8.setName("1F");
+        F7.setName("2F");
+        F6.setName("3F");
+        F5.setName("4F");
+        F4.setName("5F");
+        F3.setName("6F");
+        F2.setName("7F");
+        F1.setName("8F");
+
+        G8.setName("1G");
+        G7.setName("2G");
+        G6.setName("3G");
+        G5.setName("4G");
+        G4.setName("5G");
+        G3.setName("6G");
+        G2.setName("7G");
+        G1.setName("8G");
+
+        H8.setName("1H");
+        H7.setName("2H");
+        H6.setName("3H");
+        H5.setName("4H");
+        H4.setName("5H");
+        H3.setName("6H");
+        H2.setName("7H");
+        H1.setName("8H");
+    };
+
+    /** ///NOT WORKING: keeping for posterity
+    private void updateTextField(LinkedList list){
+        moveList = new JTextArea( );
+        for(int i=0; i<list.size(); i++){
+            moveList.append("hello world");
+        }
+     };
+     */
+
 
     public static void main(String args[]) {
         /* Create and display the form */
@@ -1101,8 +1434,16 @@ public class MainWindow extends javax.swing.JFrame {
     private String whiteQueenPath;
     private String whiteKingPath;
     private String whitePawnPath;
-    // private Tile startPosition;  where to move pieces
-    // private Tile endPosition;
+    private String emptyPiecePath;
+    private JButton startPosition;
+    private JButton endPosition;
+    private Board currentBoard;
+    private Board nextBoard;
+    private boolean secondClick;
+    private Tile tileFrom;
+    private Tile tileFromSecond;
+    private Piece pieceFrom;
+    private Game game;
 
 }
 
