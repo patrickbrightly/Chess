@@ -1,5 +1,5 @@
--Getter and Setters
--GUI button movement
+-Getter and Setters 
+-GUI button movement (DONE)
 -GUI integration
 	-GUI Side
 	-Mechanics cleanup side
