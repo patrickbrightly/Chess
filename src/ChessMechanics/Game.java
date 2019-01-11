@@ -20,26 +20,12 @@ public class Game {
         gameOver = false;
         board = new Board();
         board = setStandardBoard();
-//        board.addPiece('p',0,2,2);
-//        board.addPiece('p',0,7,1);
-//        board.addPiece('h',1,2,3);
-//        board.addPiece('h',0,7,3);
-//        board.print();
-        //Game loop
-//        mainLoop();
-//        for(int i=0;i<8;i++){
-//            for(int j=0;j<8;j++){
-//                System.out.print(board.board[i][j].name+"\t");
-//            }
-//            System.out.println();
-//        }
-//        miniMaxDecision(board);
     }
 
-    public static void main(String[] args){
-        Game g = new Game();
-    }
-
+    /**
+     * Deprecated
+     * The main loop used for ASCII representation of the board. Still works.
+     */
     public void mainLoop(){
         boolean blackCheck = false;
         boolean whiteCheck = false;
@@ -161,49 +147,46 @@ public class Game {
     }
 
     /**
-     * This method takes in a board state
+     * This method takes in a board state and returns the optimal move for the AI
      * This method is hardcoded for a ply of 3
      */
     public Move miniMaxDecision(Board board){
-//        Move result = null;
         int alpha = Integer.MIN_VALUE;
         int beta = Integer.MAX_VALUE;
-        int currentPly = 1;
-        LinkedList<Board> frontier = getSuccessors(board,0);
-//        for(Piece p:board.blackPieces){
-//            for(Tile tile:p.getMoves()){
-//                //add the new board to the frontier
-//                Board nextBoard = new Board(board,p.getTile(),tile);
-//                //move the piece to the tile needed
-//                frontier.add(nextBoard);
-////                moves.add(new Move(p,tile,board,"s"));
-//            }
-//        }
-        LinkedList<Integer> vals = new LinkedList<Integer>();
+        int currentPly = 1; //the ply always starts at 1
+        LinkedList<Board> frontier = getSuccessors(board,0);    //first successors
+        LinkedList<Integer> vals = new LinkedList<Integer>();   //the values gained from minimax
         for(Board b:frontier){
             Integer v = maximize(b,alpha,beta,1);
             vals.add(v);
         }
-        System.out.println(vals);
+        //this finds the lowest minimax value
         Integer lowest = Integer.MAX_VALUE;
         for(Integer i:vals){
             if(i<lowest){
                 lowest=i;
             }
         }
-        System.out.println(vals.indexOf(lowest));
-        System.out.println(lowest);
+        //this gets the board associate with the lowest minimax value
         Board bestBoard = frontier.get(vals.indexOf(lowest));
-        System.out.println(bestBoard.startPosition.getCurrent().getName()+bestBoard.endPosition.getName());
+        //this finds the move that lead to the bestBoard and performs the move
         return new Move(bestBoard.startPosition.getCurrent(),bestBoard.endPosition,board);
     }
 
+    /**
+     * This method does the minimize part of the minimax algorithm
+     * @param b the board to be minimized
+     * @param alpha 
+     * @param beta
+     * @param ply the current ply level
+     * @return the integer value of the minimal board from successors
+     */
     public int minimize(Board b,int alpha, int beta, int ply){
         int v = Integer.MAX_VALUE;
+        //the exit condition
         if(ply>=3){
             return b.evalutateBoard();
         }
-        //if even ply, white pieces, else black pieces
        LinkedList<Board> frontier = getSuccessors(b,1);
        for(Board b1:frontier){
            v = Math.min(v, maximize(b1,alpha,beta,ply+1));
@@ -215,14 +198,23 @@ public class Game {
         return v;
     }
     
+    /**
+     * This method does the maximize part of the minimax algorithm
+     * @param b the board to be minimized
+     * @param alpha 
+     * @param beta
+     * @param ply the current ply level
+     * @return the integer value of the minimal board from successors
+     */
     public int maximize(Board b,int alpha, int beta, int ply){
         int v = Integer.MIN_VALUE;
+        //the exit condition
         if(ply>=3){
             return b.evalutateBoard();
         }
         //if even ply, white pieces, else black pieces
        LinkedList<Board> frontier = new LinkedList<Board>();
-               frontier.addAll(getSuccessors(b,0));
+       frontier.addAll(getSuccessors(b,0));
        for(Board b1:frontier){
            v = Math.max(v, minimize(b1,alpha,beta,ply+1));
            if(v>=beta){
@@ -233,6 +225,12 @@ public class Game {
         return v;
     }
     
+    /**
+     * This method return the a linked list of all possible board states for each move on the board
+     * @param b current board state
+     * @param colour colour of the piece whose move it is
+     * @return  a linked list of possible board states
+     */
     public LinkedList<Board> getSuccessors(Board b,int colour){
         LinkedList<Board> result = new LinkedList<Board>();
         LinkedList<Piece> pieces;
@@ -257,11 +255,4 @@ public class Game {
     public Board getBoard() {
         return board;
     }
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-    
-    
-
 }

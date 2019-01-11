@@ -14,65 +14,40 @@ public class Move {
     String name;    //The move name
 
     public Move(Piece piece, Tile moveTo, Board board){
-//        name = new String();
+        name = new String();
         this.board = board;
         this.piece = piece;
-//        name = name + piece.getName();
+        name = name + piece.getName();
         this.from = piece.getTile();
-//        name = name + from.getName();
+        name = name + from.getName();
         this.to = moveTo;
         if(piece.getMoves().contains(moveTo)){ //check the move is legal
             if(!moveTo.isEmpty()){ //remove the captured piece if the square is occupied
                 piece.capture(moveTo);
-//                name = name + "X";
+                name = name + "X";
             }
             from.current = null;    //empty the move from
             to.current = piece;     //put the piece in the tile
             piece.setTile(moveTo);  //tell the piece which tile it's on
             piece.setMoved();
-//            name = name + moveTo.getName();
+            name = name + moveTo.getName();
         }
         if(piece.getName().charAt(0)=='p'){
             if(piece.getColour()==1 && piece.getTile().row==0){
-//                System.out.println("Change your pawn to a new piece");
-//                System.out.println("Queen - q");
-//                System.out.println("Bishop - b");
-//                System.out.println("Rook - r");
-//                System.out.println("Knight - h");
-//                char newPieceChar = in.next().charAt(0);
-                //create a new piece, remove the pawn
                 piece = changePawn(piece,'q');
             } else if(piece.getColour()==0 && piece.getTile().row==7){
-//                System.out.println("Change your pawn to a new piece");
-//                System.out.println("Queen - q");
-//                System.out.println("Bishop - b");
-//                System.out.println("Rook - r");
-//                System.out.println("Knight - h");
-//                char newPieceChar = in.next().charAt(0);
-                //create a new piece, remove the pawn
                 piece = changePawn(piece,'q');
-                //TODO Create a way of letting the player pick a piece
             }
         }
     }
-
-//    public Move(Piece piece, Tile moveTo, Board board, String s){
-//        this.board = board;
-//        this.piece = piece;
-//        this.from = piece.getTile();
-//        this.to = moveTo;
-//        this.name = "fakemovedonotuse";
-//    }
     
     /**
-     * This method returns the string representation of the move
-     * @return String representation of the move
+     * This method promotes a pawn upon reaching the opposite side of the board.
+     * Currently it just promotes the pawn to a queen
+     * @param pawn the pawn being promoted
+     * @param newPiece the piece it should e promoted to
+     * @return 
      */
-    @Override
-    public String toString() {
-        return (from.name + to.name);
-    }
-
     public Piece changePawn(Piece pawn, char newPiece){
         Piece result = null;
         //set the tile to empty

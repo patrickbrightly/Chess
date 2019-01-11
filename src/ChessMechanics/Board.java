@@ -10,12 +10,12 @@ public class Board {
     LinkedList<Piece> pieces; //contains a list of all the pieces on the board
     LinkedList<Piece> blackPieces;  //contains all black pieces in play
     LinkedList<Piece> whitePieces;  //contains all white pieces in play
-    Tile[][] board;   //the actual board and each position on the board
-    Tile startPosition;
-    Tile endPosition;
+    Tile[][] board;         //the actual board and each position on the board
+    Tile startPosition;     //used for the dummy boards during minimax
+    Tile endPosition;       //used for the dummy boards during minimax
 
     /**
-     * This method creates a standard 8x8 board with no pieces
+     * This constructor creates a standard 8x8 board with no pieces
      */
     public Board(){
         pieces = new LinkedList<Piece>();
@@ -32,9 +32,10 @@ public class Board {
     /**
      * This constructor takes a board, a tile and another tile
      * It moves the piece on the from tile to the to tile
-     * @param b
-     * @param from
-     * @param to 
+     * This creates a new board and is only used during creation of boards for minimax
+     * @param b the board to be copied
+     * @param from the tile the piece is moving from
+     * @param to the tile the piece is moving to
      */
     public Board(Board b, Tile from, Tile to){
         startPosition = from;
@@ -212,31 +213,22 @@ public class Board {
     }
 
     /**
-     * This function evaluates the board. + is in favour or black, - in favour of white
+     * This function evaluates the board. + is in favour or white, - in favour of black
      * @return board value
-     * Method adapted (simplified) from Shannon (1950), proper citation needed
+     * Method adapted (simplified) from Shannon (1950)
      */
     public int evalutateBoard(){
         int result = 0;
         for(Piece p: whitePieces){
-            result = result - p.getHValue();
-        }
-        for(Piece p: blackPieces){
             result = result + p.getHValue();
         }
-        return result;
-    }
-
-    public boolean isCheck(){
-        boolean result = false;
-        //can any black piece cause check?
-
-        //can any white piece cause check?
-
+        for(Piece p: blackPieces){
+            result = result - p.getHValue();
+        }
         return result;
     }
     
-        public Tile[][] getBoard() {
+    public Tile[][] getBoard() {
         return board;
     }
 
