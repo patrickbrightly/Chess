@@ -1,9 +1,8 @@
 
 	- printing to a text file
 GUI button movement
-	- image duplication
 	- A5 growth bug
-	- move behind
+	- disallow AI movement if player didnt correctly move a piece
 Mechanics
 	-Checkmate
 Extras
