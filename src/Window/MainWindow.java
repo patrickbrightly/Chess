@@ -16,7 +16,7 @@ public class MainWindow extends javax.swing.JFrame {
         setButtonNames();
         addButtonListeners(); //adds listeners
         game = new Game();    //ASSUMES creating a standard board
-        currentBoard = game.getBoard(); 
+        currentBoard = game.getBoard();
         currentBoard.print();
         drawBoard(currentBoard); //start game
         //action listener method continues once board is drawm
@@ -27,52 +27,39 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private class ButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            //TODO: only for one colour, ie only allow movement of white
             if(secondClick == false){ // if its a first click
                 startPosition = (JButton)e.getSource();  //set starting button
                 Tile[][] tileArray = currentBoard.getBoard();  // get the piece from the board
                 char[] startArray = startPosition.getName().toCharArray();
                 pieceFrom = tileArray[startArray[0]-49][Character.getNumericValue(startArray[1])-10].getCurrent();
-                //System.out.println("startpos: "+startPosition.getName()); //TODO remove, testing
                 secondClick = true;  //set flag to designate second click
             } else { //its a second click
-                 try {
-                        endPosition = (JButton) e.getSource(); //set end button
-                        Tile[][] tileArray = currentBoard.getBoard();  // use board to get end tile
-                        char[] endArray = endPosition.getName().toCharArray();
-                        tileFrom = tileArray[endArray[0] - 49][Character.getNumericValue(endArray[1]) - 10];
-                        //System.out.println("endpos: " + endPosition.getName()); //TODO remove, testing
+                try {
+                    endPosition = (JButton) e.getSource(); //set end button
+                    Tile[][] tileArray = currentBoard.getBoard();  // use board to get end tile
+                    char[] endArray = endPosition.getName().toCharArray();
+                    tileFrom = tileArray[endArray[0] - 49][Character.getNumericValue(endArray[1]) - 10];
 
-                        Move m = new Move(pieceFrom, tileFrom, currentBoard); //move piece to new tile
+                    Move m = new Move(pieceFrom, tileFrom, currentBoard); //move piece to new tile
 
-                        ImageIcon empty = new ImageIcon(emptyPiecePath);  //make moved area empty
-                        startPosition.setIcon(empty);
-                        currentBoard.print(); //TODO remove, for testing
-                        drawBoard(currentBoard);
-                        
-                        m = game.miniMaxDecision(currentBoard);
+                    ImageIcon empty = new ImageIcon(emptyPiecePath);  //make moved area empty
+                    startPosition.setIcon(empty);
+                    currentBoard.print();
+                    drawBoard(currentBoard);
+
+                    m = game.miniMaxDecision(currentBoard);
 //                        mapButton(m.getFrom().getCurrent()).setIcon(empty);
-                        currentBoard.print();
-                        //TODO if(currentBoard.checkmate() gameOver
-                        //
-                 } catch (NullPointerException exception){
+                    currentBoard.print();
+                    //
+                } catch (NullPointerException exception){
                     // do nothing
-                 }
+                }
                 secondClick = false; //reset flag
                 pieceFrom = null; //reset variables
                 tileFrom = null;
                 startPosition = null;
                 endPosition = null;
             }
-            
-
-            //TODO:
-            //Get Minimax Move
-            //Do the move
-
-            //TODO print board, new game buttons etc
-            //TODO add moves to the move window
-
         }
     }
 
@@ -597,9 +584,7 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * draws the board based on the passed board file
      */
-    private void drawBoard(Board board){ //TODO: test clear
-        //this.removeAll();// clear previous board ???
-        //removeAll(); // TODO: clear before draw !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private void drawBoard(Board board){
         for (int i=0; i<board.getPieces().size(); i++){
             mapImage(board.getPieces().get(i).getTile().getCurrent());
         }
@@ -990,11 +975,11 @@ public class MainWindow extends javax.swing.JFrame {
         endGameButton.setText("End Game");
 
         firstPlayer = new javax.swing.JLabel();
-        firstPlayer.setText("Player");    //TODO: set to whoever goes first, make more general if 2 AI
+        firstPlayer.setText("Player");    
         firstPlayer.setFont(playerNames);
 
         secondPlayer = new javax.swing.JLabel();
-        secondPlayer.setText("Computer"); //TODO: set to whoever goes second
+        secondPlayer.setText("Computer"); 
         secondPlayer.setFont(playerNames);
 
 
@@ -1196,7 +1181,7 @@ public class MainWindow extends javax.swing.JFrame {
                 ImageIcon q = new ImageIcon(whiteQueenPath);
                 mapButton(piece).setIcon(q);
                 break;
-            case "--": //empty TODO create an empty case TESTTTTTTT
+            case "--": //empty
                 ImageIcon empty = new ImageIcon(emptyPiecePath);
                 mapButton(piece).setIcon(empty);
 
@@ -1204,30 +1189,29 @@ public class MainWindow extends javax.swing.JFrame {
     }; //placePiece
 
     /**
-    private void newGameButtonMouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-        game = new Game();    //creating a standard board
-        currentBoard = game.getBoard();
-        drawBoard(currentBoard); //start game
-    }
-    * */
+     private void newGameButtonMouseClicked(java.awt.event.MouseEvent evt) {
+     game = new Game();    //creating a standard board
+     currentBoard = game.getBoard();
+     drawBoard(currentBoard); //start game
+     }
+     * */
     /**
      * This method provides a localized place to change/set image PNG paths.
      */
-    private void setImagePaths(){ //TODO: cupdate relative paths with master
-        blackRookPath = "..\\Chess\\blackRook.png";
-        blackKnightPath = "..\\Chess\\blackKnight.png";
-        blackBishopPath = "..\\Chess\\blackBishop.png";
-        blackQueenPath = "..\\Chess\\blackQueen.png";
-        blackKingPath = "..\\Chess\\blackKing.png";
-        blackPawnPath = "..\\Chess\\blackPawn.png";
-        whiteRookPath = "..\\Chess\\whiteRook.png";
-        whiteKnightPath = "..\\Chess\\whiteKnight.png";
-        whiteBishopPath = "..\\Chess\\whiteBishop.png";
-        whiteQueenPath = "..\\Chess\\whiteQueen.png";
-        whiteKingPath = "..\\Chess\\whiteKing.png";
-        whitePawnPath = "..\\Chess\\whitePawn.png";
-        emptyPiecePath = "..\\Chess\\transparent.png";
+    private void setImagePaths(){ 
+        blackRookPath = "..\\Chess-Patrick\\blackRook.png";
+        blackKnightPath = "..\\Chess-Patrick\\blackKnight.png";
+        blackBishopPath = "..\\Chess-Patrick\\blackBishop.png";
+        blackQueenPath = "..\\Chess-Patrick\\blackQueen.png";
+        blackKingPath = "..\\Chess-Patrick\\blackKing.png";
+        blackPawnPath = "..\\Chess-Patrick\\blackPawn.png";
+        whiteRookPath = "..\\Chess-Patrick\\whiteRook.png";
+        whiteKnightPath = "..\\Chess-Patrick\\whiteKnight.png";
+        whiteBishopPath = "..\\Chess-Patrick\\whiteBishop.png";
+        whiteQueenPath = "..\\Chess-Patrick\\whiteQueen.png";
+        whiteKingPath = "..\\Chess-Patrick\\whiteKing.png";
+        whitePawnPath = "..\\Chess-Patrick\\whitePawn.png";
+        emptyPiecePath = "..\\Chess-Patrick\\transparent.png";
     }
 
     /**
@@ -1308,11 +1292,11 @@ public class MainWindow extends javax.swing.JFrame {
     };
 
     /** ///NOT WORKING: keeping for posterity
-    private void updateTextField(LinkedList list){
-        moveList = new JTextArea( );
-        for(int i=0; i<list.size(); i++){
-            moveList.append("hello world");
-        }
+     private void updateTextField(LinkedList list){
+     moveList = new JTextArea( );
+     for(int i=0; i<list.size(); i++){
+     moveList.append("hello world");
+     }
      };
      */
 
@@ -1456,5 +1440,4 @@ public class MainWindow extends javax.swing.JFrame {
     private Game game;
 
 }
-
 
