@@ -11,45 +11,59 @@ public class Move {
     Piece piece;    //the piece which was moved
     Tile from;      //the tile it moved from
     Tile to;        //the tile it moved to
-    Scanner in;
+    String name;    //The move name
 
-    public Move(Piece piece, Tile moveTo, Board board, Scanner in){
+    public Move(Piece piece, Tile moveTo, Board board){
+//        name = new String();
         this.board = board;
         this.piece = piece;
+//        name = name + piece.getName();
         this.from = piece.getTile();
+//        name = name + from.getName();
         this.to = moveTo;
         if(piece.getMoves().contains(moveTo)){ //check the move is legal
             if(!moveTo.isEmpty()){ //remove the captured piece if the square is occupied
                 piece.capture(moveTo);
+//                name = name + "X";
             }
             from.current = null;    //empty the move from
             to.current = piece;     //put the piece in the tile
             piece.setTile(moveTo);  //tell the piece which tile it's on
             piece.setMoved();
+//            name = name + moveTo.getName();
         }
         if(piece.getName().charAt(0)=='p'){
-            if(piece.getColour()==0 && piece.getTile().row==0){
-                System.out.println("Change your pawn to a new piece");
-                System.out.println("Queen - q");
-                System.out.println("Bishop - b");
-                System.out.println("Rook - r");
-                System.out.println("Knight - h");
-                char newPieceChar = in.next().charAt(0);
+            if(piece.getColour()==1 && piece.getTile().row==0){
+//                System.out.println("Change your pawn to a new piece");
+//                System.out.println("Queen - q");
+//                System.out.println("Bishop - b");
+//                System.out.println("Rook - r");
+//                System.out.println("Knight - h");
+//                char newPieceChar = in.next().charAt(0);
                 //create a new piece, remove the pawn
-                piece = changePawn(piece,newPieceChar);
-            } else if(piece.getColour()==1 && piece.getTile().row==7){
-                System.out.println("Change your pawn to a new piece");
-                System.out.println("Queen - q");
-                System.out.println("Bishop - b");
-                System.out.println("Rook - r");
-                System.out.println("Knight - h");
-                char newPieceChar = in.next().charAt(0);
+                piece = changePawn(piece,'q');
+            } else if(piece.getColour()==0 && piece.getTile().row==7){
+//                System.out.println("Change your pawn to a new piece");
+//                System.out.println("Queen - q");
+//                System.out.println("Bishop - b");
+//                System.out.println("Rook - r");
+//                System.out.println("Knight - h");
+//                char newPieceChar = in.next().charAt(0);
                 //create a new piece, remove the pawn
-                piece = changePawn(piece,newPieceChar);
+                piece = changePawn(piece,'q');
+                //TODO Create a way of letting the player pick a piece
             }
         }
     }
 
+//    public Move(Piece piece, Tile moveTo, Board board, String s){
+//        this.board = board;
+//        this.piece = piece;
+//        this.from = piece.getTile();
+//        this.to = moveTo;
+//        this.name = "fakemovedonotuse";
+//    }
+    
     /**
      * This method returns the string representation of the move
      * @return String representation of the move
@@ -65,7 +79,7 @@ public class Move {
         pawn.getTile().current = null;
         //remove the piece from the game
         board.pieces.remove(pawn);
-        if(pawn.getColour()==0){
+        if(pawn.getColour()==1){
             board.blackPieces.remove(pawn);
         } else{
             board.whitePieces.remove(pawn);
@@ -74,4 +88,15 @@ public class Move {
         result = board.addPiece(newPiece,pawn.getColour(),pawn.getTile().row+1,pawn.getTile().col+1);
         return result;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Tile getFrom() {
+        return from;
+    }
+    
+    
+    
 }

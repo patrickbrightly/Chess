@@ -29,8 +29,8 @@ public class Pawn implements Piece {
      */
     public LinkedList<Tile> getMoves(){
         LinkedList<Tile> result = new LinkedList<Tile>();
-        //black pawns move in the negative, white in the positive
-        if(colour == 0){
+        //white pawns move in the negative, black in the positive
+        if(colour == 1){
             //check the tile 1 ahead, unless at the last row
             if(tile.row-1>=0 && board.board[tile.row-1][tile.col].current==null) {
                 result.add(board.board[tile.row - 1][tile.col]);

@@ -11,6 +11,8 @@ public class Board {
     LinkedList<Piece> blackPieces;  //contains all black pieces in play
     LinkedList<Piece> whitePieces;  //contains all white pieces in play
     Tile[][] board;   //the actual board and each position on the board
+    Tile startPosition;
+    Tile endPosition;
 
     /**
      * This method creates a standard 8x8 board with no pieces
@@ -27,7 +29,16 @@ public class Board {
         }
     }
 
+    /**
+     * This constructor takes a board, a tile and another tile
+     * It moves the piece on the from tile to the to tile
+     * @param b
+     * @param from
+     * @param to 
+     */
     public Board(Board b, Tile from, Tile to){
+        startPosition = from;
+        endPosition = to;
         pieces = new LinkedList<Piece>();
         blackPieces = new LinkedList<Piece>();
         whitePieces = new LinkedList<Piece>();
@@ -103,7 +114,7 @@ public class Board {
                 }
             }
         }
-        new Move(board[from.row][from.col].current,board[to.row][to.col],this,new Scanner(System.in));
+        new Move(board[from.row][from.col].current,board[to.row][to.col],this);
     }
 
     /**
@@ -201,17 +212,17 @@ public class Board {
     }
 
     /**
-     * This function evaluates the board. + is in favour or white, - in favour of black
+     * This function evaluates the board. + is in favour or black, - in favour of white
      * @return board value
      * Method adapted (simplified) from Shannon (1950), proper citation needed
      */
     public int evalutateBoard(){
         int result = 0;
         for(Piece p: whitePieces){
-            result = result + p.getHValue();
+            result = result - p.getHValue();
         }
         for(Piece p: blackPieces){
-            result = result - p.getHValue();
+            result = result + p.getHValue();
         }
         return result;
     }
@@ -225,7 +236,23 @@ public class Board {
         return result;
     }
     
-    public Board getBoard() {
+        public Tile[][] getBoard() {
         return board;
+    }
+
+    public LinkedList<Piece> getPieces() {
+        return pieces;
+    }
+
+    public LinkedList<Piece> getBlackPieces() {
+        return blackPieces;
+    }
+
+    public LinkedList<Piece> getWhitePieces() {
+        return whitePieces;
+    }
+    
+    public Tile getStartPosition(){
+        return startPosition;
     }
 }

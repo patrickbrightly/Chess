@@ -7,7 +7,7 @@ public class Knight implements Piece {
     Tile tile;      //the tile the piece is on
     int colour;     //the colour of the piece
     String name;    //the name of the piece (for ASCII representation)
-    int value = 4;  //The base value of the piece
+    int value = 3;  //The base value of the piece
 
 
     /**
@@ -41,7 +41,7 @@ public class Knight implements Piece {
             if (board.board[tile.row + 1][tile.col - 2].current == null) {
                 result.add(board.board[tile.row + 1][tile.col - 2]);
             } else if (board.board[tile.row + 1][tile.col - 2].current.getColour() != colour) {
-                result.add(board.board[tile.row + 2][tile.col - 2]);
+                result.add(board.board[tile.row + 1][tile.col - 2]);
             }
         }
         //1 left, 2 up
@@ -73,7 +73,7 @@ public class Knight implements Piece {
             if (board.board[tile.row + 1][tile.col + 2 ].current == null) {
                 result.add(board.board[tile.row + 1][tile.col + 2]);
             } else if (board.board[tile.row + 1][tile.col + 2].current.getColour() != colour) {
-                result.add(board.board[tile.row + 2][tile.col + 2]);
+                result.add(board.board[tile.row + 1][tile.col + 2]);
             }
         }
         //1 left, 2 up

@@ -7,7 +7,7 @@ public class Rook implements Piece {
     Tile tile;      //the tile the piece is on
     int colour;     //the colour of the piece
     String name;    //the name of the piece (for ASCII representation)
-    int value = 3;  //The base value of the piece
+    int value = 5;  //The base value of the piece
 
     /**
      * This constructor creates a rook

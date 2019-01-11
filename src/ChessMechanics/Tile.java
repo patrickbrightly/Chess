@@ -8,6 +8,7 @@ public class Tile {
     int row; //the row of the piece
     String name; //the name of the position (row# + column letter)
     Piece current;  //the current piece on this tile
+    
 
     /**
      * This constructor creates a tile with a known position on the board
@@ -63,4 +64,13 @@ public class Tile {
             return current.getName();
         }
     }
+
+    public Piece getCurrent() {
+        return current;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
 }
