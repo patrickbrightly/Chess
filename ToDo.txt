@@ -1,15 +1,32 @@
--Getter and Setters 
--GUI button movement (DONE)
--GUI integration
-	-GUI Side
-	-Mechanics cleanup side
--Mechanics
-	-Check
-		-Checkmate
-	-Promotion (DONE)
-	-Castling
-	-En Passent
--Minimax
-	-Generate new boards (how to do)
-	-Pass boards back
-	-How to hold the move to make
+
+	- printing to a text file
+GUI button movement
+	- image duplication
+	- A5 growth bug
+	- move behind
+Mechanics
+	-Checkmate
+Extras
+	- movelist in GUI
+	- save, endgame, etc buttons
+	- dont let black move
+	- checkmate pop-up "Game Over"
+
+BackGround
+	- AI and goal strategy
+	- adversarial search: minimax
+	- benefits to alpha beta pruning
+		time complexity
+	- evaluation function
+		pieces have weights
+		better functions
+Class Section- our implementation /Design
+	- talk about object class decisions> no player object
+	pieces as interface instead of abstract class
+	- tile objects- we chose tile bc> piece to calculate tiles it could move to versus coordinates, more abstraction , talk about 		moving to t
+	- move class> list of moves, legality
+	- GUI
+User Directions 
+	- select a white piece
+	- selecting empty pieces
+references: textbook, Shannon(eval)
