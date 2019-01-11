@@ -1,4 +1,4 @@
-package ChessGUI;
+package Window;
 
 import ChessMechanics.*;
 import javax.swing.*;
@@ -16,7 +16,8 @@ public class MainWindow extends javax.swing.JFrame {
         setButtonNames();
         addButtonListeners(); //adds listeners
         game = new Game();    //ASSUMES creating a standard board
-        currentBoard = game.getBoard(); 
+        currentBoard = game.getBoard();
+        currentBoard.print();
         drawBoard(currentBoard); //start game
         //action listener method continues once board is drawm
     }
@@ -24,52 +25,57 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Class executes code when buttons are pressed, MAIN LOOP will exist in this method
      */
-    private class ButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
+    private class ButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
             //TODO: only for one colour, ie only allow movement of white
-            if(secondClick == false){ // if its a first click
-                startPosition = (JButton)e.getSource();  //set starting button
+            if (secondClick == false) { // if its a first click
+                startPosition = (JButton) e.getSource();  //set starting button
                 Tile[][] tileArray = currentBoard.getBoard();  // get the piece from the board
                 char[] startArray = startPosition.getName().toCharArray();
-                pieceFrom = tileArray[startArray[0]-49][Character.getNumericValue(startArray[1])-10].getCurrent();
+                pieceFrom = tileArray[startArray[0] - 49][Character.getNumericValue(startArray[1]) - 10].getCurrent();
                 //System.out.println("startpos: "+startPosition.getName()); //TODO remove, testing
                 secondClick = true;  //set flag to designate second click
             } else { //its a second click
-                 try {
-                        endPosition = (JButton) e.getSource(); //set end button
-                        Tile[][] tileArray = currentBoard.getBoard();  // use board to get end tile
-                        char[] endArray = endPosition.getName().toCharArray();
-                        tileFrom = tileArray[endArray[0] - 49][Character.getNumericValue(endArray[1]) - 10];
-                        //System.out.println("endpos: " + endPosition.getName()); //TODO remove, testing
+                try {
+                    endPosition = (JButton) e.getSource(); //set end button
+                    Tile[][] tileArray = currentBoard.getBoard();  // use board to get end tile
+                    char[] endArray = endPosition.getName().toCharArray();
+                    tileFrom = tileArray[endArray[0] - 49][Character.getNumericValue(endArray[1]) - 10];
+                    //System.out.println("endpos: " + endPosition.getName()); //TODO remove, testing
 
-                        Move m = new Move(pieceFrom, tileFrom, currentBoard); //move piece to new tile
+                    Move m = new Move(pieceFrom, tileFrom, currentBoard); //move piece to new tile
 
-                        ImageIcon empty = new ImageIcon(emptyPiecePath);  //make moved area empty
-                        startPosition.setIcon(empty);
-                        //currentBoard.print(); //TODO remove, for testing
-                        drawBoard(currentBoard);
-                 } catch (NullPointerException exception){
+                    ImageIcon empty = new ImageIcon(emptyPiecePath);  //make moved area empty
+                    startPosition.setIcon(empty);
+                    currentBoard.print(); //TODO remove, for testing
+                    
+                    m = game.miniMaxDecision(currentBoard);
+                    mapButton(m.getFrom().getName(),null).setIcon(empty);
+                    drawBoard(currentBoard);
+                    currentBoard.print();
+                    //TODO if(currentBoard.checkmate() gameOver
+                    
+
+                } catch (NullPointerException exception) {
                     // do nothing
-                 }
+                }
                 secondClick = false; //reset flag
                 pieceFrom = null; //reset variables
                 tileFrom = null;
                 startPosition = null;
                 endPosition = null;
+
             }
+            //TODO print board, new game buttons etc
+            //TODO add moves to the move window
+      }
 
-            //TODO:
-            //integrate with AI-OPPONENT
-            //print board, new game buttons etc
-
-
-        }
     }
 
     /**
      * adds action listeners to every tile.
      */
-    private void addButtonListeners(){
+    private void addButtonListeners() {
         newGameButton.addActionListener(new ButtonListener());
         endGameButton.addActionListener(new ButtonListener());
         A8.addActionListener(new ButtonListener());
@@ -143,12 +149,14 @@ public class MainWindow extends javax.swing.JFrame {
         H3.addActionListener(new ButtonListener());
         H2.addActionListener(new ButtonListener());
         H1.addActionListener(new ButtonListener());
-    };
+    }
+
+    ;
 
     /**
      * places the buttons and labels in the correct positions
      */
-    private void buildLayout(){
+    private void buildLayout() {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -370,7 +378,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {A1, A2, A3, A4, A6, A7, A8, B1, B2, B3, B4, B5, B6, B7, B8, C1, C2, C3, C4, C5, C6, C7, C8, D1, D2, D3, D4, D5, D6, D7, D8, E1, E2, E3, E4, E5, E6, E7, E8, F1, F2, F3, F4, F5, F6, F7, F8, G1, G2, G3, G4, G5, G6, G7, G8, H1, H2, H3, H4, H5, H6, H7, H8});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[]{A1, A2, A3, A4, A6, A7, A8, B1, B2, B3, B4, B5, B6, B7, B8, C1, C2, C3, C4, C5, C6, C7, C8, D1, D2, D3, D4, D5, D6, D7, D8, E1, E2, E3, E4, E5, E6, E7, E8, F1, F2, F3, F4, F5, F6, F7, F8, G1, G2, G3, G4, G5, G6, G7, G8, H1, H2, H3, H4, H5, H6, H7, H8});
 
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,19 +530,21 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {A1, A2, A3, A4, A5, A6, A7, A8, B1, B2, B3, B4, B5, B6, B7, B8, C1, C2, C3, C4, C5, C6, C7, C8, D1, D2, D3, D4, D5, D6, D7, D8, E1, E2, E3, E4, E5, E6, E7, E8, F1, F2, F3, F4, F5, F6, F7, F8, G1, G2, G3, G4, G5, G6, G7, G8, H1, H2, H3, H4, H5, H6, H7, H8});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[]{A1, A2, A3, A4, A5, A6, A7, A8, B1, B2, B3, B4, B5, B6, B7, B8, C1, C2, C3, C4, C5, C6, C7, C8, D1, D2, D3, D4, D5, D6, D7, D8, E1, E2, E3, E4, E5, E6, E7, E8, F1, F2, F3, F4, F5, F6, F7, F8, G1, G2, G3, G4, G5, G6, G7, G8, H1, H2, H3, H4, H5, H6, H7, H8});
 
         B8.getAccessibleContext().setAccessibleDescription("B8");
 
         pack();
-    }; //buildLayout
+    }
+
+    ; //buildLayout
 
     /**
      * places piece images in a standard chess layout - UNUSED
      * pieces retrieved from Wikimedia Commons, 'a free media repository'
      * https://commons.wikimedia.org/wiki/Category:PNG_chess_pieces/Standard_transparent
      */
-    private void createDefaultBoard(){ //for testing, will eventually take in the starting board, more general
+    private void createDefaultBoard() { //for testing, will eventually take in the starting board, more general
         ImageIcon R = new ImageIcon(blackRookPath);
         ImageIcon N = new ImageIcon(blackKnightPath);
         ImageIcon B = new ImageIcon(blackBishopPath);
@@ -583,18 +593,20 @@ public class MainWindow extends javax.swing.JFrame {
         F1.setIcon(b);
         G1.setIcon(n);
         H1.setIcon(r);
-    };//createDefaultBoard
+    }
+
+    ;//createDefaultBoard
 
     /**
      * draws the board based on the passed board file
      */
-    private void drawBoard(Board board){ //TODO: test clear
-        //this.removeAll();// clear previous board ???
-        //removeAll(); // TODO: clear before draw !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        for (int i=0; i<board.getPieces().size(); i++){
+    private void drawBoard(Board board) { 
+        for (int i = 0; i < board.getPieces().size(); i++) {
             mapImage(board.getPieces().get(i).getTile().getCurrent());
         }
-    }; //drawBoard
+    }
+
+    ; //drawBoard
 
 
     /**
@@ -991,14 +1003,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         buildLayout();
-    }; //initComponents
+    }
+
+    ; //initComponents
 
     /**
      * Maps game board names to UI buttons, used for placing pieces onto correct tiles.
+     *
      * @param pieceToPlace The Piece which button name needs to be returned.
      * @return The button/UI tile which the piece will be placed on.
      */
-    private JButton mapButton(Piece pieceToPlace){
+    private JButton mapButton(Piece pieceToPlace) {
         switch (pieceToPlace.getTile().getName()) {
             case "1A":
                 return A8;
@@ -1131,7 +1146,142 @@ public class MainWindow extends javax.swing.JFrame {
             default:
                 throw new NullPointerException("mapButton invalid");
         }
-    };
+    }
+
+    private JButton mapButton(String name, String secondArg) {
+        switch(name){
+        case "1A":
+            return A8;
+        case "2A":
+            return A7;
+        case "3A":
+            return A6;
+        case "4A":
+            return A5;
+        case "5A":
+            return A4;
+        case "6A":
+            return A3;
+        case "7A":
+            return A2;
+        case "8A":
+            return A1;
+        case "1B":
+            return B8;
+        case "2B":
+            return B7;
+        case "3B":
+            return B6;
+        case "4B":
+            return B5;
+        case "5B":
+            return B4;
+        case "6B":
+            return B3;
+        case "7B":
+            return B2;
+        case "8B":
+            return B1;
+        case "1C":
+            return C8;
+        case "2C":
+            return C7;
+        case "3C":
+            return C6;
+        case "4C":
+            return C5;
+        case "5C":
+            return C4;
+        case "6C":
+            return C3;
+        case "7C":
+            return C2;
+        case "8C":
+            return C1;
+        case "1D":
+            return D8;
+        case "2D":
+            return D7;
+        case "3D":
+            return D6;
+        case "4D":
+            return D5;
+        case "5D":
+            return D4;
+        case "6D":
+            return D3;
+        case "7D":
+            return D2;
+        case "8D":
+            return D1;
+        case "1E":
+            return E8;
+        case "2E":
+            return E7;
+        case "3E":
+            return E6;
+        case "4E":
+            return E5;
+        case "5E":
+            return E4;
+        case "6E":
+            return E3;
+        case "7E":
+            return E2;
+        case "8E":
+            return E1;
+        case "1F":
+            return F8;
+        case "2F":
+            return F7;
+        case "3F":
+            return F6;
+        case "4F":
+            return F5;
+        case "5F":
+            return F4;
+        case "6F":
+            return F3;
+        case "7F":
+            return F2;
+        case "8F":
+            return F1;
+        case "1G":
+            return G8;
+        case "2G":
+            return G7;
+        case "3G":
+            return G6;
+        case "4G":
+            return G5;
+        case "5G":
+            return G4;
+        case "6G":
+            return G3;
+        case "7G":
+            return G2;
+        case "8G":
+            return G1;
+        case "1H":
+            return H8;
+        case "2H":
+            return H7;
+        case "3H":
+            return H6;
+        case "4H":
+            return H5;
+        case "5H":
+            return H4;
+        case "6H":
+            return H3;
+        case "7H":
+            return H2;
+        case "8H":
+            return H1;
+        default:
+            throw new NullPointerException("mapButton invalid");
+    }
+}
 
     /**
      * Maps the piece name to matching image files and places images on the buttons of the board.
@@ -1194,30 +1344,31 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }; //placePiece
 
+    /**
     private void newGameButtonMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         game = new Game();    //creating a standard board
         currentBoard = game.getBoard();
         drawBoard(currentBoard); //start game
     }
-
+    * */
     /**
      * This method provides a localized place to change/set image PNG paths.
      */
     private void setImagePaths(){ //TODO: cupdate relative paths with master
-        blackRookPath = "..\\ChessGUI\\blackRook.png";
-        blackKnightPath = "..\\ChessGUI\\blackKnight.png";
-        blackBishopPath = "..\\ChessGUI\\blackBishop.png";
-        blackQueenPath = "..\\ChessGUI\\blackQueen.png";
-        blackKingPath = "..\\ChessGUI\\blackKing.png";
-        blackPawnPath = "..\\ChessGUI\\blackPawn.png";
-        whiteRookPath = "..\\ChessGUI\\whiteRook.png";
-        whiteKnightPath = "..\\ChessGUI\\whiteKnight.png";
-        whiteBishopPath = "..\\ChessGUI\\whiteBishop.png";
-        whiteQueenPath = "..\\ChessGUI\\whiteQueen.png";
-        whiteKingPath = "..\\ChessGUI\\whiteKing.png";
-        whitePawnPath = "..\\ChessGUI\\whitePawn.png";
-        emptyPiecePath = "..\\ChessGUI\\transparent.png";
+        blackRookPath = "..\\Latest_Chess\\Chess-Patrick\\blackRook.png";
+        blackKnightPath = "..\\Latest_Chess\\Chess-Patrick\\blackKnight.png";
+        blackBishopPath = "..\\Latest_Chess\\Chess-Patrick\\blackBishop.png";
+        blackQueenPath = "..\\Latest_Chess\\Chess-Patrick\\blackQueen.png";
+        blackKingPath = "..\\Latest_Chess\\Chess-Patrick\\blackKing.png";
+        blackPawnPath = "..\\Latest_Chess\\Chess-Patrick\\blackPawn.png";
+        whiteRookPath = "..\\Latest_Chess\\Chess-Patrick\\whiteRook.png";
+        whiteKnightPath = "..\\Latest_Chess\\Chess-Patrick\\whiteKnight.png";
+        whiteBishopPath = "..\\Latest_Chess\\Chess-Patrick\\whiteBishop.png";
+        whiteQueenPath = "..\\Latest_Chess\\Chess-Patrick\\whiteQueen.png";
+        whiteKingPath = "..\\Latest_Chess\\Chess-Patrick\\whiteKing.png";
+        whitePawnPath = "..\\Latest_Chess\\Chess-Patrick\\whitePawn.png";
+        emptyPiecePath = "..\\Latest_Chess\\Chess-Patrick\\transparent.png";
     }
 
     /**
@@ -1444,6 +1595,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Tile tileFromSecond;
     private Piece pieceFrom;
     private Game game;
+    private String updateComponentName;
 
 }
 
